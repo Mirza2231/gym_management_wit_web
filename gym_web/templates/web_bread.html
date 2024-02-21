@@ -1,0 +1,18 @@
+{% load static %}
+<!-- Breadcrumb Section Begin -->
+<section class="breadcrumb-section set-bg" data-setbg="{% static 'img/breadcrumb-bg.jpg' %}" >
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="breadcrumb-text">
+                    <h2 class="text-uppercase">{{ request.path_info|slice:'1:'|slice:'-1' }}</h2>
+                    <div class="bt-option">
+                        <a href="{% url 'gym_web_index' %}">Home</a>
+                        <span class="text-capitalize">{{ request.path_info|slice:'1:'|slice:'-1' }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Breadcrumb Section End -->
