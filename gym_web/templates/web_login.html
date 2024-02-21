@@ -1,0 +1,97 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Gym Template">
+    <meta name="keywords" content="Gym, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Gym | Template</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Muli:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Oswald:300,400,500,600,700&display=swap" rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="{% static 'css/web_login.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}" type="text/css">
+
+    <!-- Modal Links  -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+</head>
+
+<body>
+    <!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
+
+
+    {% load sweetify %}
+    {% sweetify %}
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-6 col-md-6 form-container">
+            <div class="col-lg-8 col-md-12 col-sm-9 col-xs-12 form-box text-center">
+                <div class="logo mt-5 mb-3">
+                    <img src="image/logo.png" width="150px">
+                </div>
+                <div class="heading mb-3">
+                    <h4>Login into your account</h4>
+                </div>
+                <form>
+                    <div class="form-input">
+                        <span><i class="fa fa-envelope"></i></span>
+                        <input type="email" placeholder="Email Address" required>
+                    </div>
+                    <div class="form-input">
+                        <span><i class="fa fa-lock"></i></span>
+                        <input type="password" placeholder="Password" required>
+                    </div>
+                    <div class="mb-3 remeber">
+                        <div class="col-6 d-flex text-left remebercheck">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="cb1">
+                                <label class="custom-control-label text-white" for="cb1" style="color: #ffffff;">Remember me</label>
+                            </div>
+                        </div>
+                        <div class="col-6 text-right remebercheck">
+                            <a href="forget.html" class="forget-link">Forget password</a>
+                        </div>
+                    </div>
+                    <div class="text-left mb-3">
+                        <button type="submit" class="btn">Login</button>
+                    </div>
+                    <div class="text-white" style="color: #ffffff;">Don't have an account?
+                        <a href="register.html" class="register-link">Register here</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="col-lg-6 col-md-6 d-none d-md-block image-container"></div>
+    </div>
+</div>
+
+
+<!-- Js Plugins -->
+
+<script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+<script src="{% static 'js/masonry.pkgd.min.js' %}"></script>
+<script src="{% static 'js/jquery.barfiller.js' %}"></script>
+<script src="{% static 'js/jquery.slicknav.js' %}"></script>
+<script src="{% static 'js/owl.carousel.min.js' %}"></script>
+<script src="{% static 'js/main.js' %}"></script>
+
+</body>
+
+</html>

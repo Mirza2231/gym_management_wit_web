@@ -26,6 +26,8 @@ urlpatterns = [
     path('about/',web_view.gym_web_about, name='gym_web_about'),
     path('service/',web_view.gym_web_service, name='gym_web_service'),
     path('team/',web_view.gym_web_team, name='gym_web_team'),
+    path('login/',web_view.gym_web_login, name='gym_web_login'),
+    path('register/',web_view.gym_web_register, name='gym_web_register'),
     
     
     # path('about/',About, name = 'about'),

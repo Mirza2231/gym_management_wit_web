@@ -123,9 +123,12 @@
                 </div>
                 <div class="col-lg-3">
                     <div class="top-option">
-                        <!-- <div class="to-search search-switch">
-                            <i class="fa fa-search"></i>
-                        </div> -->
+                        <div class="to-search search-switch">
+                            <li class="{% if request.path == '/login/' %}active{% endif %}"><a
+                                href="{% url 'gym_web_login' %}">Login</a></li> /
+                                <li class="{% if request.path == '/register/' %}active{% endif %}"><a
+                                    href="{% url 'gym_web_register' %}">Register</a></li>
+                        </div>
                         <div class="to-social">
                             <a href="#"><i class="fa fa-facebook"></i></a>
                             <a href="#"><i class="fa fa-twitter"></i></a>

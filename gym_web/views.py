@@ -37,6 +37,12 @@ def gym_web_about(request):
 def gym_web_team(request):
     return render(request, 'web_team.html')
 
+def gym_web_login(request):
+    return render(request, 'web_login.html')
+
+def gym_web_register(request):
+    return render(request, 'web_register.html')
+
 # def gym_web_index(request):
 #     return render(request, 'web_index.html')
 
