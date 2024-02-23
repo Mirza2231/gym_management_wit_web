@@ -21,7 +21,7 @@ from gym_web import views as web_view
 urlpatterns = [
     path('admin/', admin.site.urls),
     # path('',Home, name='home'),
-    path('web/',web_view.gym_web_index, name='gym_web_index'),
+    path('',web_view.gym_web_index, name='gym_web_index'),
     path('contact/',web_view.gym_web_contact, name='gym_web_contact'),
     path('about/',web_view.gym_web_about, name='gym_web_about'),
     path('service/',web_view.gym_web_service, name='gym_web_service'),
