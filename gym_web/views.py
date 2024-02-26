@@ -1,10 +1,9 @@
 from django.shortcuts import render, redirect
-from django.urls import resolve
-from django.http import JsonResponse
 from .models import *
 from .forms import ContactForm
 from django.contrib import messages
 import sweetify
+
 
 # Create your views here.
 
@@ -37,14 +36,12 @@ def gym_web_about(request):
 def gym_web_team(request):
     return render(request, 'web_team.html')
 
-def gym_web_login(request):
-    return render(request, 'web_login.html')
+# def gym_web_login(request):
+#     return render(request, 'web_login.html')
 
-def gym_web_register(request):
-    return render(request, 'web_register.html')
+# def gym_web_register(request):
+#     return render(request, 'web_register.html')
 
-# def gym_web_index(request):
-#     return render(request, 'web_index.html')
 
-# def gym_web_index(request):
-#     return render(request, 'web_index.html')
+
+

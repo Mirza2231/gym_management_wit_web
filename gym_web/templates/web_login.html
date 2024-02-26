@@ -46,7 +46,7 @@
                 <div class="heading mb-3">
                     <h4>Login into your account</h4>
                 </div>
-                <form>
+                <!-- <form>
                     <div class="form-input">
                         <span><i class="fa fa-envelope"></i></span>
                         <input type="email" placeholder="Email Address" required>
@@ -75,6 +75,11 @@
                     <div class="text-white" style="color: #ffffff;">Don't want to create an account?
                         <a href="{% url 'gym_web_index' %}" class="register-link">Home here</a>
                     </div>
+                </form> -->
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit">Login</button>
                 </form>
             </div>
         </div>
