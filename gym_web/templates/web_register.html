@@ -36,95 +36,97 @@
     {% sweetify %}
 
 
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-lg-6 col-md-6 form-container">
-            <div class="col-lg-8 col-md-12 col-sm-9 col-xs-12 form-box text-center">
-                <div class="logo mt-5 mb-3">
-                    <img src="image/logo.png" width="150px">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 form-container">
+                <div class="col-lg-8 col-md-12 col-sm-9 col-xs-12 form-box text-center">
+                    <div class="logo mt-5 mb-3">
+                        <img src="image/logo.png" width="150px">
+                    </div>
+                    <div class="heading mb-3">
+                        <h4>Create an account</h4>
+                    </div>
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="form-input">
+                            <span><i class="fa fa-user"></i></span>
+                            <input type="text" name='first_name' placeholder="First Name" required>
+                        </div>
+                        <div class="form-input">
+                            <span><i class="fa fa-user"></i></span>
+                            <input type="text" name='last_name' placeholder="Last Name" required>
+                        </div>
+                        <div class="form-input">
+                            <span><i class="fa fa-user"></i></span>
+                            <input type="text" name='father_name' placeholder="Father Name" required>
+                        </div>
+                        <div class="form-input">
+                            <span><i class="fa fa-envelope"></i></span>
+                            <input type="email" name='email' placeholder="Email Address" required>
+                        </div>
+                        <div class="form-input">
+                            <span><i class="fa fa-user"></i></span>
+                            <input type="text" name='username' placeholder="Username" required>
+                        </div>
+
+                        <div class="form-input">
+                            <span><i class="fa fa-user"></i></span>
+                            <select name="gender" id="id_gender">
+                                <option value="">Gender</option>
+                                <option value="M">Male</option>
+                                <option value="F">Female</option>
+                                <option value="O">Other</option>
+                            </select>
+                        </div>
+
+                        <div class="form-input " style="display: flex;">
+                            <span><i class="fa fa-user"></i></span>
+                            <input for="id_profile_pic" value="Profile Pic" disabled style="width: 32%;"></input>
+                            <input type="file" name="profile_pic" accept="image/*" id="id_profile_pic">
+                            <!-- <label for="id_profile_pic">Profile Picture</label>
+                            <input type="file" name="profile_pic" accept="image/*" id="id_profile_pic"> -->
+                        </div>
+                        <div class="form-input">
+                            <span><i class="fa fa-lock"></i></span>
+                            <input type="password" name="password1" autocomplete="new-password" placeholder="Password"
+                                required="" aria-describedby="id_password1_helptext" id="id_password1">
+                        </div>
+                        <div class="form-input">
+                            <span><i class="fa fa-lock"></i></span>
+                            <input type="password" name="password2" autocomplete="new-password"
+                                placeholder="Confirm Password" required="" aria-describedby="id_password2_helptext"
+                                id="id_password2">
+                        </div>
+                        <div class="text-left mb-3">
+                            <button type="submit" class="btn">Register</button>
+                        </div>
+                        <div class="text-white" style="color: #ffffff;">Don't have an account?
+                            <a href="{% url 'gym_web_register' %}" class="register-link">Register here</a>
+                        </div>
+                        <div class="text-white" style="color: #ffffff;">Don't want to create an account?
+                            <a href="{% url 'gym_web_index' %}" class="register-link">Home here</a>
+                        </div>
+                    </form>
+
+
                 </div>
-                <div class="heading mb-3">
-                    <h4>Create an account</h4>
-                </div>
-                <!-- <form>
-                    <div class="form-input">
-                        <span><i class="fa fa-envelope"></i></span>
-                        <input type="text" placeholder="Full Name" required>
-                    </div>
-                    <div class="form-input">
-                        <span><i class="fa fa-envelope"></i></span>
-                        <input type="text" placeholder="Father Name" required>
-                    </div>
-                    <h3>Gender</h3>
-
-                    <div class="mb-3 gender">
-                        <div class="col-6 d-flex text-left gendercheck">
-
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="cb1">
-                                <label class="custom-control-label text-white" for="cb1" style="color: #ffffff; font-size: larger;">Male</label>
-                            </div>
-                        </div>
-                        <div class="col-6 d-flex text-left gendercheck">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="cb1">
-                                <label class="custom-control-label text-white" for="cb1" style="color: #ffffff; font-size: larger;">Female</label>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="form-input">
-                        <span><i class="fa fa-envelope"></i></span>
-                        <input type="email" placeholder="Email Address" required>
-                    </div>
-                    <div class="form-input">
-                        <span><i class="fa fa-lock"></i></span>
-                        <input type="password" placeholder="Password" required>
-                    </div>
-                    <div class="mb-3 remeber">
-                        <div class="col-6 d-flex text-left remebercheck">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="cb1">
-                                <label class="custom-control-label text-white" for="cb1" style="color: #ffffff; font-size: larger;">Remember me</label>
-                            </div>
-                        </div>
-                        <div class="col-6 text-right remebercheck">
-                            <a href="forget.html" class="forget-link">Forget password</a>
-                        </div>
-                    </div>
-                    <div class="text-left mb-3">
-                        <button type="submit" class="btn">Login</button>
-                    </div>
-                    <div class="text-white" style="color: #ffffff;">Don't have an account?
-                        <a href="{% url 'gym_web_register' %}" class="register-link">Register here</a>
-                    </div>
-                    <div class="text-white" style="color: #ffffff;">Don't want to create an account?
-                        <a href="{% url 'gym_web_index' %}" class="register-link">Home here</a>
-                    </div>
-                </form> -->
-                <form method="post" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    {{ form.as_p }}
-                    <button type="submit">Sign Up</button>
-                </form>
             </div>
+
+            <div class="col-lg-6 col-md-6 d-none d-md-block image-container"></div>
         </div>
-
-        <div class="col-lg-6 col-md-6 d-none d-md-block image-container"></div>
     </div>
-</div>
 
 
-<!-- Js Plugins -->
+    <!-- Js Plugins -->
 
-<script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
-<script src="{% static 'js/bootstrap.min.js' %}"></script>
-<script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
-<script src="{% static 'js/masonry.pkgd.min.js' %}"></script>
-<script src="{% static 'js/jquery.barfiller.js' %}"></script>
-<script src="{% static 'js/jquery.slicknav.js' %}"></script>
-<script src="{% static 'js/owl.carousel.min.js' %}"></script>
-<script src="{% static 'js/main.js' %}"></script>
+    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+    <script src="{% static 'js/masonry.pkgd.min.js' %}"></script>
+    <script src="{% static 'js/jquery.barfiller.js' %}"></script>
+    <script src="{% static 'js/jquery.slicknav.js' %}"></script>
+    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
 
 </body>
 

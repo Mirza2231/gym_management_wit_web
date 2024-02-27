@@ -118,11 +118,45 @@ body {
     margin-bottom: 20px;
 }
 
+/* asasasa */
+#id_gender{
+    font-size: 13px;
+    color: #d5d4d4;
+    width: 100%;
+    height: 40px;
+    border: 1px solid #575656;
+    padding-left: 45px;
+    padding-right: 5px;
+    background: transparent;
+    margin-bottom: 20px;
+}
+
+#id_gender > option{
+    font-size: 13px;
+    color: #d5d4d4;
+    width: 100%;
+    height: 40px;
+    border: 1px solid #575656;
+    padding-left: 45px;
+    padding-right: 5px;
+    background: #272727;
+    margin-bottom: 20px;
+}
+
+
 .form-box .form-input span{
     position: absolute;
     top: 8px;
     padding-left: 20px;
     color: #777;
+}
+
+div > form > div.profilepic{
+    display: flex;
+}
+
+#id_profile_pic{
+    padding-top: 8px;
 }
 
 .form-box .form-input input::placeholder{
@@ -274,4 +308,33 @@ body > div.container-fluid > div > div.col-lg-6.col-md-6.form-container > div > 
 .form-box .btn-twitter:hover{
     background: #2eb7e5;
     color: #fff;
+}
+body>div.swal2-container.swal2-center.swal2-backdrop-show>div {
+	width: 36% !important;
+}
+
+
+body>div.swal2-container.swal2-center.swal2-backdrop-show>div {
+	background-color: #151515;
+}
+
+body>div.swal2-container.swal2-center.swal2-backdrop-show>div>div.swal2-icon.swal2-success.swal2-icon-show>div.swal2-success-circular-line-left {
+	background-color: transparent !important;
+}
+
+body>div.swal2-container.swal2-center.swal2-backdrop-show>div>div.swal2-icon.swal2-success.swal2-icon-show>div.swal2-success-fix {
+	background-color: transparent !important;
+}
+
+body>div.swal2-container.swal2-center.swal2-backdrop-show>div>div.swal2-icon.swal2-success.swal2-icon-show>div.swal2-success-circular-line-right {
+	background-color: transparent !important;
+}
+
+#swal2-title {
+	color: #FFFFFF;
+}
+
+body>div.swal2-container.swal2-center.swal2-backdrop-show>div>div.swal2-actions>button.swal2-confirm.swal2-styled {
+	background-color: #F36100 !important;
+	color: #FFFFEF;
 }
