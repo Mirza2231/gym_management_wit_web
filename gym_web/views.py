@@ -5,7 +5,8 @@ from django.contrib import messages
 import sweetify
 from django.contrib.auth import login, authenticate
 from .forms import SignUpForm
-
+from .forms import UserLoginForm
+from django.contrib.auth import logout
 
 # Create your views here.
 
@@ -60,21 +61,49 @@ def signup(request):
                 raw_password = sign_form.cleaned_data.get('password1')
                 user = authenticate(username=user.username, password=raw_password)
                 login(request, user)
-                sweetify.success(request, 'Register Sucessfull', timer=5000, timerProgressBar='true', persistent="Close")
-                return redirect('gym_web_login')  # Redirect to the homepage after successful signup
+                sweetify.success(request, 'Welcome! Register Sucessfull', timer=5000, timerProgressBar='true', persistent="Close")
+                return redirect('gym_web_index')  # Redirect to the homepage after successful signup
              except Exception as e: 
                 sweetify.error(request, 'An error occurred please try again later', timer=5000, timerProgressBar='true', persistent="Close")
         else:
             errors = []
-            for field_errors in sign_form.errors.items():
-                for error in field_errors:
-                    error_message = f"{error}"
-                    errors.append(error_message)
+            for field_errors in sign_form.errors.values():
+                errors.extend(field_errors)
+                
             error_messages = "\n".join(errors)
             sweetify.error(request, f'{error_messages}', timer=5000, timerProgressBar='true', persistent="Close")
     else:
         sign_form = SignUpForm()
     return render(request, 'web_register.html', {'sign_form': sign_form})
+
+
+def login_view(request):
+    if request.method == 'POST':
+        login_form = UserLoginForm(request, request.POST)
+        if login_form.is_valid():
+            username = login_form.cleaned_data.get('username')
+            password = login_form.cleaned_data.get('password')
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('gym_web_index')  # Redirect to the homepage after successful login
+        else:
+            # login_form.add_error(None, "Invalid username or password.")
+            errors = []
+            for field_errors in login_form.errors.values():
+                errors.extend(field_errors)
+
+            error_messages = "\n".join(errors)
+            sweetify.error(request, f'{error_messages}', timer=5000, timerProgressBar='true', persistent="Close")
+            # sweetify.error(request, f'{login_form.errors}', timer=5000, timerProgressBar='true', persistent="Close")
+    else:
+        login_form = UserLoginForm()
+    return render(request, 'web_login.html', {'login_form': login_form})
+
+
+def logout_view(request):
+    logout(request)
+    return redirect('gym_web_login')
 
 
 

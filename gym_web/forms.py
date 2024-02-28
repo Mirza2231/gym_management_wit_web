@@ -4,6 +4,7 @@ from .models import Contact
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from .models import UserProfile
+from django.contrib.auth.forms import AuthenticationForm
 
 
 
@@ -20,3 +21,8 @@ class SignUpForm(UserCreationForm):
     class Meta:
         model = User
         fields = ('username', 'email','first_name','last_name', 'father_name', 'gender', 'profile_pic', 'password1', 'password2')
+        
+class UserLoginForm(AuthenticationForm):
+    class Meta:
+        model = User
+        fields = ['username', 'password']

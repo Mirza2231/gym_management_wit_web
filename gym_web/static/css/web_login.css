@@ -338,3 +338,8 @@ body>div.swal2-container.swal2-center.swal2-backdrop-show>div>div.swal2-actions>
 	background-color: #F36100 !important;
 	color: #FFFFEF;
 }
+
+#swal2-title{
+    font-size: x-large;
+}
+

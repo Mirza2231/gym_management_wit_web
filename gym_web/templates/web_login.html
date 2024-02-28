@@ -8,7 +8,7 @@
     <meta name="keywords" content="Gym, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Gym | Template</title>
+    <title>Gym {% if request.path_info|slice:'1:'|slice:'-1' %}| {% endif %}{{ request.path_info|slice:'1:'|slice:'-1'|title }}</title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css?family=Muli:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
@@ -46,14 +46,15 @@
                 <div class="heading mb-3">
                     <h4>Login into your account</h4>
                 </div>
-                <!-- <form>
+                <form method="post">
+                    {% csrf_token %}
                     <div class="form-input">
                         <span><i class="fa fa-envelope"></i></span>
-                        <input type="email" placeholder="Email Address" required>
+                        <input type="text" name="username" placeholder="Username" required>
                     </div>
                     <div class="form-input">
                         <span><i class="fa fa-lock"></i></span>
-                        <input type="password" placeholder="Password" required>
+                        <input type="password" name="password" placeholder="Password" required>
                     </div>
                     <div class="mb-3 remeber">
                         <div class="col-6 d-flex text-left remebercheck">
@@ -75,10 +76,10 @@
                     <div class="text-white" style="color: #ffffff;">Don't want to create an account?
                         <a href="{% url 'gym_web_index' %}" class="register-link">Home here</a>
                     </div>
-                </form> -->
+                </form>
                 <!-- <form method="post">
                     {% csrf_token %}
-                    {{ form.as_p }}
+                    {{ login_form.as_p }}
                     <button type="submit">Login</button>
                 </form> -->
             </div>

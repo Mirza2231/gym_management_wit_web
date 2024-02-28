@@ -26,8 +26,9 @@ urlpatterns = [
     path('about/',web_view.gym_web_about, name='gym_web_about'),
     path('service/',web_view.gym_web_service, name='gym_web_service'),
     path('team/',web_view.gym_web_team, name='gym_web_team'),
-    path('login/',web_view.gym_web_login, name='gym_web_login'),
+    path('login/',web_view.login_view, name='gym_web_login'),
     path('register/',web_view.signup, name='gym_web_register'),
+    path('logout/', web_view.logout_view, name='logout'),
     
     
     # path('about/',About, name = 'about'),

@@ -8,7 +8,7 @@
     <meta name="keywords" content="Gym, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Gym | Template</title>
+    <title style="text-transform: uppercase;">Gym {% if request.path_info|slice:'1:'|slice:'-1' %}| {% endif %}{{ request.path_info|slice:'1:'|slice:'-1'|title }}</title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css?family=Muli:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
@@ -47,8 +47,8 @@
         </div> -->
         <nav class="canvas-menu mobile-menu">
             <ul>
-                <li class="{% if request.path == '/' %}active{% endif %}"><a
-                        href="{% url 'gym_web_index' %}">Home</a></li>
+                <li class="{% if request.path == '/' %}active{% endif %}"><a href="{% url 'gym_web_index' %}">Home</a>
+                </li>
                 <li class="{% if request.path == '/about/' %}active{% endif %}"><a
                         href="{% url 'gym_web_about' %}">About Us</a></li>
                 <li class="{% if request.path == '/service/' %}active{% endif %}"><a
@@ -124,10 +124,21 @@
                 <div class="col-lg-3">
                     <div class="top-option">
                         <div class="to-search search-switch">
-                            <li class="{% if request.path == '/login/' %}active{% endif %}"><a
-                                href="{% url 'gym_web_login' %}">Login</a></li> /
-                                <li class="{% if request.path == '/register/' %}active{% endif %}"><a
+
+                                    {% if request.user.is_authenticated %}
+                                    <!-- <p>{{ request.user.username }}</p> -->
+                                    <!-- <a href="{% url 'logout' %}">Logout</a> -->
+                                        <li class="{% if request.path == '/register/' %}active{% endif %}"><a
+                                            href="{% url 'logout' %}">logout</a></li>
+                                  {% else %}
+                                  <li class="{% if request.path == '/login/' %}active{% endif %}"><a
+                                    href="{% url 'gym_web_login' %}">Login</a></li> /
+                            <li class="{% if request.path == '/register/' %}active{% endif %}"><a
                                     href="{% url 'gym_web_register' %}">Register</a></li>
+                                  {% endif %}
+
+
+
                         </div>
                         <div class="to-social">
                             <a href="#"><i class="fa fa-facebook"></i></a>
