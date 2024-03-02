@@ -77,7 +77,6 @@ body {
 .image-container{
     background: url('../img/login.jpg') center no-repeat;
     background-size: cover;
-    height: 100vh;
 }
 
 .form-container{
@@ -343,3 +342,12 @@ body>div.swal2-container.swal2-center.swal2-backdrop-show>div>div.swal2-actions>
     font-size: x-large;
 }
 
+@media (max-width: 991px) {
+    body > div.container-fluid > div {
+        display: block;
+    }
+
+    body > div.container-fluid > div > div.col-lg-6.col-md-6.form-container{
+        height: 100vh;
+    }
+}

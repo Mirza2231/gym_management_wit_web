@@ -39,9 +39,9 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-6 col-md-6 form-container">
-                <div class="col-lg-8 col-md-12 col-sm-9 col-xs-12 form-box text-center">
+                <div class="col-lg-8 col-md-12 col-sm-9 col-xs-12 form-box text-center" style="margin: 2% 0;">
                     <div class="logo mt-5 mb-3">
-                        <img src="image/logo.png" width="150px">
+                        <img src="{% static 'img/2edit.png' %}" width="250px">
                     </div>
                     <div class="heading mb-3">
                         <h4>Create an account</h4>
@@ -101,7 +101,7 @@
                             <button type="submit" class="btn">Register</button>
                         </div>
                         <div class="text-white" style="color: #ffffff;">Don't have an account?
-                            <a href="{% url 'gym_web_register' %}" class="register-link">Register here</a>
+                            <a href="{% url 'gym_web_login' %}" class="login-link">Login here</a>
                         </div>
                         <div class="text-white" style="color: #ffffff;">Don't want to create an account?
                             <a href="{% url 'gym_web_index' %}" class="register-link">Home here</a>

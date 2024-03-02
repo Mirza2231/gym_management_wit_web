@@ -86,6 +86,7 @@ def login_view(request):
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 login(request, user)
+                sweetify.success(request,'Login Sucessfull', timer=5000, timerProgressBar='true', persistent="Close")
                 return redirect('gym_web_index')  # Redirect to the homepage after successful login
         else:
             # login_form.add_error(None, "Invalid username or password.")
