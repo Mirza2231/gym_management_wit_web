@@ -189,5 +189,36 @@ $(document).ready(function () {
 //     $('#errorAlert').fadeOut('slow')
 // }, 10000);
 
+// document.addEventListener('DOMContentLoaded', function() {
+//     const enableFieldButtons = document.querySelectorAll('.enable-field');
 
+//     enableFieldButtons.forEach(button => {
+//         button.addEventListener('click', function() {
+//             const fieldName = this.dataset.field;
+//             const inputField = document.querySelector(`[name="${fieldName}"]`);
+//             inputField.disabled = false;
+//             inputField.focus(); // Optionally focus on the input field
+//         });
+//     });
+// });
+
+document.addEventListener('DOMContentLoaded', function() {
+    const enableFieldButtons = document.querySelectorAll('.enable-field');
+
+    enableFieldButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const fieldName = this.dataset.field;
+            const inputField = document.querySelector(`[name="${fieldName}"]`);
+            inputField.disabled = false;
+            inputField.focus(); // Optionally focus on the input field
+        });
+    });
+
+    document.getElementById('profile-edit-form').addEventListener('submit', function() {
+        const disabledFields = document.querySelectorAll('[disabled]');
+        disabledFields.forEach(field => {
+            field.disabled = false; // Enable disabled fields before form submission
+        });
+    });
+});
 

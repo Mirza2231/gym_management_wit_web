@@ -8,8 +8,7 @@
     <meta name="keywords" content="Gym, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title style="text-transform: uppercase;">Gym {% if request.path_info|slice:'1:'|slice:'-1' %}| {% endif %}{{
-        request.path_info|slice:'1:'|slice:'-1'|title }}</title>
+    <title style="text-transform: uppercase;">Gym {% if request.path_info|slice:'1:'|slice:'-1' %}| {% endif %}{{request.path_info|slice:'1:'|slice:'-1'|title }}</title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css?family=Muli:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
@@ -139,11 +138,21 @@
                     <div class="top-option">
                         <div class="to-search search-switch">
 
+
+
                             {% if request.user.is_authenticated %}
-                            <!-- <p>{{ request.user.username }}</p> -->
+                            <!-- <p>{{ request.user.id }}</p> -->
+                            <li><a href="#"><img src="../..{{ MEDIA_URL }}{{ user.userprofile.profile_pic.url }}" class="rounded-circle" style="height: 34px; border-radius: 50%;"></a>
+                                <ul class="dropdown">
+                                    <li><a href="{% url 'proedit' %}">Profile</a></li>
+                                    <li><a href="{% url 'change' %}">Bmi calculate</a></li>
+                                    <li><a href="{% url 'logout' %}">Logout</a></li>
+                                    <li><a href="./404.html">404</a></li>
+                                </ul>
+                            </li>
                             <!-- <a href="{% url 'logout' %}">Logout</a> -->
-                            <li class="{% if request.path == '/register/' %}active{% endif %}"><a
-                                    href="{% url 'logout' %}">logout</a></li>
+                            <!-- <li class="{% if request.path == '/register/' %}active{% endif %}"><a
+                                    href="{% url 'logout' %}">logout</a></li> -->
                             {% else %}
                             <li class="{% if request.path == '/login/' %}active{% endif %}"><a
                                     href="{% url 'gym_web_login' %}">Login</a></li> /

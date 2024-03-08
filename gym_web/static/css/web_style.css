@@ -393,6 +393,10 @@ ol {
 	color: #f36100;
 }
 
+body>header>div>div.row>div:nth-child(3)>div>div.to-search.search-switch>li.active>a {
+	color: #f36100;
+}
+
 .nav-menu ul li.active>a:after {
 	opacity: 1;
 }
@@ -401,6 +405,7 @@ ol {
 	color: #f36100;
 }
 
+
 .nav-menu ul li:hover>a:after {
 	opacity: 1;
 }
@@ -408,6 +413,64 @@ ol {
 .nav-menu ul li:hover .dropdown {
 	opacity: 1;
 	visibility: visible;
+}
+
+body>header>div>div.row>div:nth-child(3)>div>div.to-search.search-switch>li:hover .dropdown {
+	opacity: 1;
+	visibility: visible;
+}
+
+body>header>div>div.row>div:nth-child(3)>div>div.to-search.search-switch>li .dropdown {
+	position: absolute;
+	left: -30px;
+	top: 58px;
+	width: 180px;
+	background: #252525;
+	z-index: 99;
+	text-align: left;
+	padding: 13px 0 20px;
+	opacity: 0;
+	visibility: hidden;
+	-webkit-transition: all 0.3s;
+	-o-transition: all 0.3s;
+	transition: all 0.3s;
+}
+
+body>header>div>div.row>div:nth-child(3)>div>div.to-search.search-switch>li .dropdown li {
+	margin-right: 0;
+	display: block;
+}
+
+body>header>div>div.row>div:nth-child(3)>div>div.to-search.search-switch>li>ul>li>a {
+	color: #ffffff;
+	display: block;
+	font-weight: 400;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	font-family: "Oswald", sans-serif;
+	padding: 10px 0px;
+	position: relative;
+	-webkit-transition: all 0.3s;
+	-o-transition: all 0.3s;
+	transition: all 0.3s;
+	padding: 6px 0 6px 30px;
+}
+
+/* body > header > div > div.row > div:nth-child(3) > div > div.to-search.search-switch > li a {
+	display: block;
+	text-transform: none;
+	padding: 6px 0 6px 30px;
+	font-weight: 400;
+	color: #fff;
+} */
+
+body>header>div>div.row>div:nth-child(3)>div>div.to-search.search-switch>li a:hover {
+
+	color: #f36100;
+}
+
+body>header>div>div.row>div:nth-child(3)>div>div.to-search.search-switch>li a:after {
+	display: none;
 }
 
 .nav-menu ul li a {
@@ -474,34 +537,35 @@ ol {
 	cursor: pointer;
 }
 
-div.to-search.search-switch > li{
+div.to-search.search-switch>li {
 	list-style: none;
-    display: inline-block;
-    position: relative;
-    z-index: 1;
+	display: inline-block;
+	position: relative;
+	z-index: 1;
+	height: 23px;
 }
 
-div.to-search.search-switch > li > a{
-    color: #ffffff;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-family: "Oswald", sans-serif;
-    position: relative;
-    -webkit-transition: all 0.3s;
-    -o-transition: all 0.3s;
-    transition: all 0.3s;
+div.to-search.search-switch>li>a {
+	color: #ffffff;
+	font-weight: 500;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	font-family: "Oswald", sans-serif;
+	position: relative;
+	-webkit-transition: all 0.3s;
+	-o-transition: all 0.3s;
+	transition: all 0.3s;
 }
 
-div.to-search.search-switch > li:hover>a {
+div.to-search.search-switch>li:hover>a {
 	color: #f36100;
 }
 
-div.to-search.search-switch > li:hover>a:after {
+div.to-search.search-switch>li:hover>a:after {
 	opacity: 1;
 }
 
-div.to-search.search-switch > li > a:after {
+div.to-search.search-switch>li>a:after {
 	position: absolute;
 	left: 0;
 	top: 12px;
@@ -3444,4 +3508,84 @@ body>div.swal2-container.swal2-center.swal2-backdrop-show>div>div.swal2-icon.swa
 body>div.swal2-container.swal2-center.swal2-backdrop-show>div>div.swal2-actions>button.swal2-confirm.swal2-styled {
 	background-color: #F36100 !important;
 	color: #FFFFEF;
+}
+
+
+#id_gender {
+	font-size: 13px;
+	color: #d5d4d4;
+	width: 100%;
+	height: 46px;
+	border: 1px solid #575656;
+	padding-left: 45px;
+	padding-right: 5px;
+	background: transparent;
+	margin-bottom: 20px;
+}
+
+
+
+#id_gender>option {
+	font-size: 13px;
+	color: #d5d4d4;
+	width: 100%;
+	height: 40px;
+	border: 1px solid #575656;
+	padding-left: 45px;
+	padding-right: 5px;
+	background: #272727;
+	margin-bottom: 20px;
+}
+
+.user {
+	position: relative;
+}
+
+.profile img {
+
+
+    height: 170px;
+    width: 188px;
+    border-radius: 50%;
+
+
+}
+
+.profile {
+
+	position: relative;
+    left: 38%;
+    height: 176px;
+    width: 193px;
+    border: 3px solid #fff;
+    border-radius: 50%;
+
+}
+
+.img-circle {
+	border-radius: 50%;
+  }
+
+.enable-field{
+	width: 6% !important;
+    position: absolute;
+    right: 2%;
+    height: 5%;
+    background: transparent !important;
+}
+
+.enable-field:hover{
+	background-color: #555555 !important;
+}
+
+body > section.contact-section.spad > div > div > div > div > form > p:nth-child(5) > button{
+	width: 6% !important;
+    position: absolute;
+    right: 4%;
+    height: 5%;
+    background: transparent !important;
+}
+
+body > section.contact-section.spad > div > div > div > div > form > p:nth-child(5) > button:hover{
+	background-color: #555555;
 }

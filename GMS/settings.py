@@ -138,3 +138,8 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'gym_web/static'),
 ]
 
+MEDIA_ROOT = os.path.join(BASE_DIR, 'profile_pics')
+
+# Define the URL that will be used to serve media files uploaded by users.
+MEDIA_URL = '/profile_pics/'
+

@@ -7,6 +7,12 @@ from django.contrib.auth import login, authenticate
 from .forms import SignUpForm
 from .forms import UserLoginForm
 from django.contrib.auth import logout
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth import update_session_auth_hash
+from django.shortcuts import render, redirect
+from .forms import CustomPasswordChangeForm
+from django.contrib.auth.decorators import login_required
+from .forms import ProfileEditForm
 
 # Create your views here.
 
@@ -77,6 +83,24 @@ def signup(request):
     return render(request, 'web_register.html', {'sign_form': sign_form})
 
 
+@login_required
+def profile_edit(request):
+    if request.method == 'POST':
+        pro_form = ProfileEditForm(request.POST, request.FILES, instance=request.user.userprofile)
+        if pro_form.is_valid():
+            pro_form.save()
+            sweetify.success(request, 'Profile updated successfully', timer=5000, timerProgressBar='true', persistent="Close")
+            return redirect('gym_web_index')  # Redirect to the user's profile page
+        else:
+            errors = []
+            for field_errors in pro_form.errors.values():
+                errors.extend(field_errors)
+            error_messages = "\n".join(errors)
+            sweetify.error(request, f'{error_messages}', timer=5000, timerProgressBar='true', persistent="Close")
+    else:
+        pro_form = ProfileEditForm(instance=request.user.userprofile)
+    return render(request, 'web_proedit.html', {'pro_form': pro_form})
+
 def login_view(request):
     if request.method == 'POST':
         login_form = UserLoginForm(request, request.POST)
@@ -105,6 +129,18 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     return redirect('gym_web_login')
+
+def password_change(request):
+    if request.method == 'POST':
+        form = CustomPasswordChangeForm(user=request.user, data=request.POST)
+        if form.is_valid():
+            form.save()
+            # Update the session to prevent the user from being logged out
+            update_session_auth_hash(request, form.user)
+            return redirect('gym_web_index')  # Redirect to the user's profile page
+    else:
+        form = CustomPasswordChangeForm(user=request.user)
+    return render(request, 'web_changepass.html', {'form': form})
 
 
 

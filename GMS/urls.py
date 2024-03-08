@@ -17,6 +17,8 @@ from django.contrib import admin
 from django.urls import path, include
 from gym import views as admin_view
 from gym_web import views as web_view
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -29,6 +31,9 @@ urlpatterns = [
     path('login/',web_view.login_view, name='gym_web_login'),
     path('register/',web_view.signup, name='gym_web_register'),
     path('logout/', web_view.logout_view, name='logout'),
+    path('change/', web_view.password_change, name='change'),
+    path('edit/', web_view.profile_edit, name='proedit'),
+
     
     
     # path('about/',About, name = 'about'),
@@ -52,4 +57,8 @@ urlpatterns = [
     # path('view_member/',View_Member,name='view_member'),
     # path('delete_member(?p<int:pid>)', Delete_Member, name='delete_member'),
 ]
+
+    
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
  
