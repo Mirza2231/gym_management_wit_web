@@ -13,12 +13,16 @@ from django.shortcuts import render, redirect
 from .forms import CustomPasswordChangeForm
 from django.contrib.auth.decorators import login_required
 from .forms import ProfileEditForm
+from gym.models import Trainer
 
 # Create your views here.
 
+def custom_404_view(request, exception):
+    return render(request, '404.html', status=404)
 
 def gym_web_index(request):
-    return render(request, 'web_index.html')
+    trainers = Trainer.objects.all()
+    return render(request, 'web_index.html', {'trainers': trainers})
 
 def gym_web_service(request):
         return render(request, 'web_services.html')
@@ -43,13 +47,8 @@ def gym_web_about(request):
     return render(request, 'web_about-us.html')
 
 def gym_web_team(request):
-    return render(request, 'web_team.html')
-
-def gym_web_login(request):
-    return render(request, 'web_login.html')
-
-def gym_web_register(request):
-    return render(request, 'web_register.html')
+    trainers = Trainer.objects.all()
+    return render(request, 'web_team.html', {'trainers': trainers})
 
 def signup(request):
     if request.method == 'POST':
@@ -58,7 +57,7 @@ def signup(request):
              email = sign_form.cleaned_data.get('email')
              if User.objects.filter(email=email).exists():
                     sweetify.error(request, f"Email '{email}' already exists. Account not created.", timer=5000, timerProgressBar='true', persistent="Close")
-             try:
+             try: 
                 user = sign_form.save()
                 father_name = sign_form.cleaned_data.get('father_name')
                 gender = sign_form.cleaned_data.get('gender')
@@ -81,6 +80,7 @@ def signup(request):
     else:
         sign_form = SignUpForm()
     return render(request, 'web_register.html', {'sign_form': sign_form})
+
 
 
 @login_required
@@ -132,15 +132,16 @@ def logout_view(request):
 
 def password_change(request):
     if request.method == 'POST':
-        form = CustomPasswordChangeForm(user=request.user, data=request.POST)
-        if form.is_valid():
-            form.save()
+        cp_form = CustomPasswordChangeForm(user=request.user, data=request.POST)
+        if cp_form.is_valid():
+            cp_form.save()
+            sweetify.success(request,'Password Change Sucessfull', timer=5000, timerProgressBar='true', persistent="Close")
             # Update the session to prevent the user from being logged out
-            update_session_auth_hash(request, form.user)
+            update_session_auth_hash(request, cp_form.user)
             return redirect('gym_web_index')  # Redirect to the user's profile page
     else:
-        form = CustomPasswordChangeForm(user=request.user)
-    return render(request, 'web_changepass.html', {'form': form})
+        cp_form = CustomPasswordChangeForm(user=request.user)
+    return render(request, 'web_changepass.html', {'cp_form': cp_form})
 
 
 

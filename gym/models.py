@@ -43,3 +43,23 @@ class Member(models.Model):
 
     def __str__(self):
         return self.name
+    
+class Trainer(models.Model):
+    name = models.CharField(max_length=50)
+    contact = models.CharField(max_length=12,unique=True)
+    email = models.CharField(max_length=50,unique=True)
+    age = models.IntegerField(max_length=40)
+    GENDER_CHOICES = [
+        ('M', 'Male'),
+        ('F', 'Female'),
+        ('O', 'Other'),
+    ]
+    gender = models.CharField(max_length=1, choices=GENDER_CHOICES)
+    instalink = models.CharField(max_length=500)
+    xlink = models.CharField(max_length=400)
+    facebooklink = models.CharField(max_length=400)
+    profile_pic = models.ImageField(upload_to='trainer_pics', blank=True)
+
+
+    def __str__(self):
+        return self.name

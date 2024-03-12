@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -9,8 +9,82 @@
     <h1>Password Change</h1>
     <form method="post">
         {% csrf_token %}
-        {{ form.as_p }}
+        {{ cp_form.as_p }}
         <button type="submit">Change Password</button>
     </form>
 </body>
-</html>
+</html> -->
+<!-- 
+
+<form method="post">
+    <input type="hidden" name="csrfmiddlewaretoken" value="vntDxoE9tUnQtHHrYmp2AjMSws5cZoSZkodeTTC6hbltAZc4Iaolj4mSAlOSEttW">
+    <p>
+<label for="id_old_password">Old password:</label>
+<input type="password" name="old_password" autocomplete="current-password" autofocus="" required="" id="id_old_password">
+
+
+</p>
+
+
+<p>
+<label for="id_new_password1">New password:</label>
+<input type="password" name="new_password1" autocomplete="new-password" required="" aria-describedby="id_new_password1_helptext" id="id_new_password1">
+
+  <span class="helptext" id="id_new_password1_helptext"></span></p><ul><li>Your password can’t be too similar to your other personal information.</li><li>Your password must contain at least 8 characters.</li><li>Your password can’t be a commonly used password.</li><li>Your password can’t be entirely numeric.</li></ul>
+
+
+<p></p>
+
+
+<p>
+<label for="id_new_password2">New password confirmation:</label>
+<input type="password" name="new_password2" autocomplete="new-password" required="" id="id_new_password2">
+
+
+  
+
+</p>
+    <button type="submit">Change Password</button>
+</form> -->
+
+{% load static %}
+{% include 'web_header.html' %}
+{% include 'web_bread.html' %}
+
+<!-- Contact Section Begin -->
+<section class="contact-section spad">
+    <div class="container">
+        <div class="row" style="display: flex; justify-content: center;">
+            <div class="col-lg-8">
+                <div class="leave-comment">
+                    <form method="post" action="#">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <!-- <input type="text" name="name" placeholder="Name" class="form-control" required> -->
+                            <input type="password" name="old_password" autocomplete="current-password" autofocus=""
+                                required="" id="id_old_password" placeholder="Old password">
+
+                        </div>
+                        <div class="form-group">
+                            <!-- <input type="email" name="email" placeholder="Email" class="form-control" required> -->
+                            <input type="password" name="new_password1" autocomplete="new-password" required=""
+                                aria-describedby="id_new_password1_helptext" id="id_new_password1"
+                                placeholder="New password">
+
+                        </div>
+                        <div class="form-group">
+                            <!-- <input type="text" name="subject" placeholder="Subject" class="form-control" required> -->
+                            <input type="password" name="new_password2" autocomplete="new-password" required=""
+                                id="id_new_password2" placeholder="New password confirmation">
+                        </div>
+
+                        <button type="submit">Change Password</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Contact Section End -->
+
+{% include 'web_footer.html' %}

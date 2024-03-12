@@ -1,0 +1,44 @@
+.custombg {
+    background: url("../images/auth/loginBg.jpg") !important;
+    /* background-size: cover;  */
+}
+.form-control:focus{
+color: white;
+}
+
+body>div.swal2-container.swal2-center.swal2-backdrop-show>div {
+	width: 36% !important;
+}
+
+
+body>div.swal2-container.swal2-center.swal2-backdrop-show>div {
+	background-color: #191C24;
+}
+
+body>div.swal2-container.swal2-center.swal2-backdrop-show>div>div.swal2-icon.swal2-success.swal2-icon-show>div.swal2-success-circular-line-left {
+	background-color: transparent !important;
+}
+
+body>div.swal2-container.swal2-center.swal2-backdrop-show>div>div.swal2-icon.swal2-success.swal2-icon-show>div.swal2-success-fix {
+	background-color: transparent !important;
+}
+
+body>div.swal2-container.swal2-center.swal2-backdrop-show>div>div.swal2-icon.swal2-success.swal2-icon-show>div.swal2-success-circular-line-right {
+	background-color: transparent !important;
+}
+
+#swal2-title {
+	color: #FFFFFF;
+}
+
+body>div.swal2-container.swal2-center.swal2-backdrop-show>div>div.swal2-actions>button.swal2-confirm.swal2-styled {
+	background-color: #F36100 !important;
+	color: #FFFFEF;
+}
+
+.form-control:disabled{
+    background-color: #2A3038 !important;
+    opacity: 0.9 !important;
+    color: #ffffff !important;
+}
+	

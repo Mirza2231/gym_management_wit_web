@@ -14,15 +14,18 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path
 from gym import views as admin_view
 from gym_web import views as web_view
 from django.conf import settings
 from django.conf.urls.static import static
+from django.conf.urls import handler404
+from gym_web.views import custom_404_view
+
+handler404 = custom_404_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # path('',Home, name='home'),
     path('',web_view.gym_web_index, name='gym_web_index'),
     path('contact/',web_view.gym_web_contact, name='gym_web_contact'),
     path('about/',web_view.gym_web_about, name='gym_web_about'),
@@ -30,35 +33,48 @@ urlpatterns = [
     path('team/',web_view.gym_web_team, name='gym_web_team'),
     path('login/',web_view.login_view, name='gym_web_login'),
     path('register/',web_view.signup, name='gym_web_register'),
-    path('logout/', web_view.logout_view, name='logout'),
-    path('change/', web_view.password_change, name='change'),
-    path('edit/', web_view.profile_edit, name='proedit'),
+    path('logout/', web_view.logout_view, name='web_logout'),
+    path('changepassword/', web_view.password_change, name='change'),
+    path('profile/', web_view.profile_edit, name='proedit'),
 
     
     
-    # path('about/',About, name = 'about'),
+    # path('about/',About, name = 'about'), 
     # path('contact/',Contact, name = 'contact'),
-    # path('admin_login',Login, name='login'),
     # path('logout/',Logout, name='logout'),
 
-    # path('add_enquiry/',Add_Enquiry,name='add_enquiry'),
-    # path('view_enquiry/',View_Enquiry,name='view_enquiry'),
-    # path('delete_enquiry(?p<int:pid>)', Delete_Enquiry, name='delete_enquiry'),
+# Admin Urls
 
-    # path('add_equipment/',Add_Equipment,name='add_equipment'),
-    # path('view_equipment/',View_Equipment,name='view_equipment'),
-    # path('delete_equipment(?p<int:pid>)', Delete_Equipment, name='delete_equipment'),
+    path('admin_login',admin_view.Login, name='login'),
+    path('admin_home',admin_view.Home, name='home'),
+    path('add_trainer/',admin_view.ad_tariner,name='add_trainer'),
+    path('edit_trainer/<int:trainer_id>/',admin_view.edit_trainer, name='edit_trainer'),
+    path('delete_trainer/<int:trainer_id>/delete/', admin_view.delete_trainer, name='delete_trainer'),
+    path('view_trainer/<int:pk>/',admin_view.TrainerDetailView.as_view() , name='trainer_detail'),
+    path('table/',admin_view.Table,name='table'),
+    
+    
+    path('add_enquiry/',admin_view.Add_Enquiry,name='add_enquiry'),
+    path('view_enquiry/',admin_view.View_Enquiry,name='view_enquiry'),
+    path('delete_enquiry(?p<int:pid>)', admin_view.Delete_Enquiry, name='delete_enquiry'),
 
-    # path('add_plan/',Add_Plan,name='add_plan'),
-    # path('view_plan/',View_Plan,name='view_plan'),
-    # path('delete_plan(?p<int:pid>)', Delete_Plan, name='delete_plan'),
+    path('add_equipment/',admin_view.Add_Equipment,name='add_equipment'),
+    path('view_equipment/',admin_view.View_Equipment,name='view_equipment'),
+    path('delete_equipment(?p<int:pid>)', admin_view.Delete_Equipment, name='delete_equipment'),
 
-    # path('add_member/',Add_Member,name='add_member'),
-    # path('view_member/',View_Member,name='view_member'),
-    # path('delete_member(?p<int:pid>)', Delete_Member, name='delete_member'),
+    path('add_plan/',admin_view.Add_Plan,name='add_plan'),
+    
+    path('view_plan/',admin_view.View_Plan,name='view_plan'),
+    path('delete_plan(?p<int:pid>)', admin_view.Delete_Plan, name='delete_plan'),
+
+    path('add_member/',admin_view.Add_Member,name='add_member'),
+    path('view_member/',admin_view.View_Member,name='view_member'),
+    path('delete_member(?p<int:pid>)', admin_view.Delete_Member, name='delete_member'),
 ]
 
-    
+
+
+
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
  

@@ -1,25 +1,64 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect ,get_object_or_404
 from django.http import HttpResponseRedirect
 
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, logout, login
 from .models import *
+from .forms import *
+import sweetify
+from django.views.generic import DetailView
 
 # Create your views here.
 
 
 def Home(request):
-    if not request.user.is_staff:
-        return redirect('login')
-    return render(request, 'index.html')
-
-
+   return render(request, 'admin_index.html')
+ 
 def About(request):
     return render(request, 'about.html')
 
+def ad_tariner(request):
+    trainers = Trainer.objects.all()
+    if request.method == 'POST':
+        trainer_form = AddTrainerForm(request.POST, request.FILES)
+        if trainer_form.is_valid():
+            trainer_form.save()
+            sweetify.success(request, 'Your Submission Has Done Sucessfully', timer=5000, timerProgressBar='true', persistent="Close")
+        else:
+            sweetify.error(request, 'Something Wrong Try Again Later', timer=5000, timerProgressBar='true', persistent="Close")
 
-def Contact(request):
-    return render(request, 'contact.html')
+    else:
+        trainer_form = AddTrainerForm()
+    return render(request, 'admin_trainers.html', {'trainer_form': trainer_form, 'trainers': trainers})
+
+def delete_trainer(request, trainer_id):
+    trainer = Trainer.objects.get(id=trainer_id)
+    trainer.delete()
+    return redirect('add_trainer')
+
+def edit_trainer(request, trainer_id):
+    trainer = get_object_or_404(Trainer, id=trainer_id)
+    if request.method == 'POST':
+        et_form = TrainerEditForm(request.POST, request.FILES, instance=trainer)
+        if et_form.is_valid():
+            et_form.save()
+            sweetify.success(request, 'Trainer Edited Sucessfully', timer=5000, timerProgressBar='true', persistent="Close")
+            return redirect('add_trainer')  # Redirect to the list of trainers after editing
+        else:
+            sweetify.error(request, 'Some Error Occured', timer=5000, timerProgressBar='true', persistent="Close")
+            
+    else:
+        et_form = TrainerEditForm(instance=trainer)
+    return render(request, 'edit_trainer.html', {'et_form': et_form})
+
+class TrainerDetailView(DetailView):
+    model = Trainer
+    template_name = 'trainer_detail.html'  # The template to render
+    context_object_name = 'trainer'
+
+
+def Table(request):
+    return render(request, 'basic-table.html')
 
 
 def Login(request):
@@ -43,9 +82,9 @@ def Login(request):
 
 def Logout(request):
     if not request.user.is_staff:
-        return redirect('login')
+        return redirect('admin_login')
     logout(request)
-    return redirect('login')
+    return redirect('admin_login')
 
 
 def Add_Enquiry(request):

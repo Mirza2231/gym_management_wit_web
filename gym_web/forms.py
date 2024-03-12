@@ -30,7 +30,7 @@ class UserLoginForm(AuthenticationForm):
         fields = ['username', 'password']
         
 
-class CustomPasswordChangeForm(PasswordChangeForm):
+class CustomPasswordChangeForm(PasswordChangeForm): 
     pass 
 
 

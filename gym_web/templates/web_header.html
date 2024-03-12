@@ -1,6 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="zxx">
+<html lang="zxx"> 
 
 <head>
     <meta charset="UTF-8">
@@ -71,9 +71,8 @@
                         href="{% url 'gym_web_contact' %}">Contact</a></li>
                 {% if request.user.is_authenticated %}
                 <!-- <p>{{ request.user.username }}</p> -->
-                <!-- <a href="{% url 'logout' %}">Logout</a> -->
                 <li class="{% if request.path == '/register/' %}active{% endif %}"><a
-                        href="{% url 'logout' %}">logout</a></li>
+                        href="{% url 'web_logout' %}">logout</a></li>
                 {% else %}
                 <li class="{% if request.path == '/login/' %}active{% endif %}"><a
                         href="{% url 'gym_web_login' %}">Login</a></li>
@@ -142,17 +141,29 @@
 
                             {% if request.user.is_authenticated %}
                             <!-- <p>{{ request.user.id }}</p> -->
-                            <li><a href="#"><img src="../..{{ MEDIA_URL }}{{ user.userprofile.profile_pic.url }}" class="rounded-circle" style="height: 34px; border-radius: 50%;"></a>
+                            <li>
+                                {% if user.userprofile.profile_pic %}
+                                <a href="#"><img src="../..{{ MEDIA_URL }}{{ user.userprofile.profile_pic.url }}"
+                                        class="rounded-circle" style="height: 34px; border-radius: 50%;"></a>
+                                <!-- <img src="../..{{ MEDIA_URL }}{{ user.userprofile.profile_pic.url }}" class="rounded-circle" width="80"> -->
+                                {% else %}
+                                <div class="profile-initial" style="    height: 30px;
+                                background: white;
+                                border-radius: 50%;
+                                width: 34px;
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                text-transform: uppercase;">{{ user.username|first }}</div>
+                                {% endif %}
                                 <ul class="dropdown">
                                     <li><a href="{% url 'proedit' %}">Profile</a></li>
-                                    <li><a href="{% url 'change' %}">Bmi calculate</a></li>
-                                    <li><a href="{% url 'logout' %}">Logout</a></li>
+                                    <li><a href="{% url 'change' %}">Change Password</a></li>
+                                    <li><a href="{% url 'web_logout' %}">Logout</a></li>
                                     <li><a href="./404.html">404</a></li>
                                 </ul>
                             </li>
-                            <!-- <a href="{% url 'logout' %}">Logout</a> -->
-                            <!-- <li class="{% if request.path == '/register/' %}active{% endif %}"><a
-                                    href="{% url 'logout' %}">logout</a></li> -->
+
                             {% else %}
                             <li class="{% if request.path == '/login/' %}active{% endif %}"><a
                                     href="{% url 'gym_web_login' %}">Login</a></li> /
