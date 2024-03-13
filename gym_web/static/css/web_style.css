@@ -3589,3 +3589,8 @@ body > section.contact-section.spad > div > div > div > div > form > p:nth-child
 body > section.contact-section.spad > div > div > div > div > form > p:nth-child(5) > button:hover{
 	background-color: #555555;
 }
+
+body > section.pricing-section.spad > div > div.row.justify-content-center > div > div > ul > li.facilities-list > p{
+	line-height: 16px;
+	color: #c4c4c4;
+}

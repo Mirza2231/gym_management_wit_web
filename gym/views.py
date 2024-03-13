@@ -17,6 +17,8 @@ def Home(request):
 def About(request):
     return render(request, 'about.html')
 
+# My Work Start
+
 def ad_tariner(request):
     trainers = Trainer.objects.all()
     if request.method == 'POST':
@@ -56,6 +58,93 @@ class TrainerDetailView(DetailView):
     template_name = 'trainer_detail.html'  # The template to render
     context_object_name = 'trainer'
 
+def pcategory(request):
+    pcategorys = PCategory.objects.all()
+    if request.method == 'POST':
+        pcategory_form = PcategoryForm(request.POST)
+        if pcategory_form.is_valid():
+            pcategory_form.save()
+            sweetify.success(request, 'Your Submission Has Done Sucessfully', timer=5000, timerProgressBar='true', persistent="Close")
+        else:
+            sweetify.error(request, 'Something Wrong Try Again Later', timer=5000, timerProgressBar='true', persistent="Close")
+
+    else:
+        pcategory_form = PcategoryForm()
+    return render(request, 'admin_pcategory.html', {'pcategory_form': pcategory_form, 'pcategorys': pcategorys})
+
+def edit_pcategory(request, pcategory_id):
+    pcategory = get_object_or_404(PCategory, id=pcategory_id)
+    if request.method == 'POST':
+        etpc_form = PcategoryEditForm(request.POST, request.FILES, instance=pcategory)
+        if etpc_form.is_valid():
+            etpc_form.save()
+            sweetify.success(request, 'Category Edited Sucessfully', timer=5000, timerProgressBar='true', persistent="Close")
+            return redirect('add_pcategory')  # Redirect to the list of trainers after editing
+        else:
+            sweetify.error(request, 'Some Error Occured', timer=5000, timerProgressBar='true', persistent="Close")
+            
+    else:
+        etpc_form = PcategoryEditForm(instance=pcategory)
+    return render(request, 'edit_pcategory.html', {'etpc_form': etpc_form})
+
+
+def delete_pcategory(request, pcategory_id):
+    pcategory = PCategory.objects.get(id=pcategory_id)
+    pcategory.delete()
+    return redirect('add_pcategory')
+
+class PcategoryDetailView(DetailView):
+    model = PCategory
+    template_name = 'pcategory_detail.html'  # The template to render
+    context_object_name = 'pcategory'
+    
+def membership_package(request):
+    packages = MembershipPackage.objects.all() 
+    if request.method == 'POST':
+        form = MembershipPackageForm(request.POST)
+        if form.is_valid():
+            form.save()
+            sweetify.success(request, 'Your Submission Has Done Sucessfully', timer=5000, timerProgressBar='true', persistent="Close")
+            return redirect('admin_package.html')
+        else:
+            sweetify.error(request, 'Something Wrong Try Again Later', timer=5000, timerProgressBar='true', persistent="Close")
+    else:
+        form = MembershipPackageForm()
+    return render(request, 'admin_package.html', {'form': form, 'packages': packages})
+
+def edit_package(request, package_id):
+    package = get_object_or_404(MembershipPackage, id=package_id)
+    s_category = PCategory.objects.all() 
+    if request.method == 'POST':
+        etp_form = PackageEditForm(request.POST, request.FILES, instance=package)
+        if etp_form.is_valid():
+            etp_form.save()
+            sweetify.success(request, 'Package Edited Sucessfully', timer=5000, timerProgressBar='true', persistent="Close")
+            return redirect('add_package')  # Redirect to the list of trainers after editing
+        else:
+            sweetify.error(request, 'Some Error Occured', timer=5000, timerProgressBar='true', persistent="Close")
+            
+    else:
+        etp_form = PackageEditForm(instance=package)
+    return render(request, 'edit_package.html', {'etp_form': etp_form, 's_category':s_category})
+
+class PackageDetailView(DetailView):
+    model = MembershipPackage
+    template_name = 'package_detail.html'  # The template to render
+    context_object_name = 'package'
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        package = self.object  # Get the current MembershipPackage object
+        category = package.category  # Get the related category object
+        context['category'] = category  # Add the category object to the context
+        return context
+    
+def delete_pcategory(request, package_id):
+    package = MembershipPackage.objects.get(id=package_id)
+    package.delete()
+    return redirect('add_package')
+
+# My Work End
 
 def Table(request):
     return render(request, 'basic-table.html')

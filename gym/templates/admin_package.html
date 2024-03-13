@@ -1,0 +1,107 @@
+{% load static %}
+{% include '_navbar.html' %}
+<!-- partial -->
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class='row'>
+            <!-- Add Category Form -->
+            <div class="col-md-6 col-xl-4 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Add Packages</h4>
+                        <form method="post" action="" class="forms-sample" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="id_package_name">Name</label>
+                                <input type="text" name="package_name" maxlength="100" required="" id="id_package_name"
+                                    class="form-control" placeholder="Package Name">
+                            </div>
+                            <div class="form-group">
+                                <label for="id_price">Price</label>
+                                <input type="text" name="price" step="0.01" required="" id="id_price"
+                                    class="form-control" placeholder="Price">
+
+
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="id_category">Category</label>
+                                <select name="category" required="" id="id_category" class="form-control"
+                                    placeholder="Category">
+                                    <option value="">Select Category</option>
+                                    {% for category in categories %}
+                                    <option value="{{ category.id }}">{{ category.name }}</option>
+                                    {% endfor %}
+
+                                </select>
+
+
+
+                            </div>
+
+                            <div class="form-group">
+
+                                <label for="id_facilities">Facilities</label>
+                                <textarea name="facilities" maxlength="400" required="" cols="80" rows="10"
+                                    id="id_facilities" class="form-control" placeholder="Facebook Link"></textarea>
+
+
+                            </div>
+
+
+                            <button type="submit" class="btn btn-inverse-primary me-2">Add Package</button>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Display Categories -->
+            <div class="col-md-6 col-xl-8 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body" style="
+                  height: 390px;
+                  overflow: auto;
+                  overflow-x: hidden;
+              ">
+                        <div class="d-flex flex-row justify-content-between">
+                            <h4 class="card-title">Packages</h4>
+                        </div>
+                        {% for package in packages %}
+
+                        <div class="preview-list">
+                            <div class="preview-item border-bottom">
+                                <div class="preview-thumbnail">
+
+                                </div>
+                                <div class="preview-item-content d-flex flex-grow">
+                                    <div class="flex-grow">
+                                        <div class="d-flex d-md-block d-xl-flex justify-content-between">
+                                            <h6 class="preview-subject text-capitalize">{{ package.package_name }}</h6>
+                                        </div>
+                                        <p class="text-muted">{{ package.price }}</p>
+                                    </div>
+                                </div>
+                                <div class="d-flex d-md-block d-xl-flex justify-content-between" style="
+                                      width: 176px;
+                                      align-items: center;
+                                  ">
+                                    <a href="{% url 'edit_package' package.id %}" 
+                                        class="btn btn-inverse-warning btn-sm">Edit</a>
+                                <a href="{% url 'package_detail' package.id %}" class=" btn btn-inverse-info btn-sm">View</a>
+                                <a href="{% url 'delete_package' package.id %}" class="btn btn-inverse-danger btn-sm"
+                                onclick="return confirm('Are you sure you want to delete this?');">Delete</a>
+
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+{% include '_footer.html' %}

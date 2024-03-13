@@ -21,6 +21,9 @@ class Equipment(models.Model):
 
     def __str__(self):
         return self.name
+    
+    
+
 class Plan(models.Model):
     name = models.CharField(max_length=50)
     amount = models.CharField(max_length=10)
@@ -63,3 +66,19 @@ class Trainer(models.Model):
 
     def __str__(self):
         return self.name
+
+class PCategory(models.Model):
+    name = models.CharField(max_length=100)
+    description = models.CharField(max_length=500)
+
+    def __str__(self):
+        return self.name
+    
+class MembershipPackage(models.Model):
+    package_name = models.CharField(max_length=100)
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+    category = models.ForeignKey(PCategory, on_delete=models.CASCADE)
+    facilities = models.TextField()
+
+    def __str__(self):
+        return self.package_name

@@ -13,16 +13,24 @@ from django.shortcuts import render, redirect
 from .forms import CustomPasswordChangeForm
 from django.contrib.auth.decorators import login_required
 from .forms import ProfileEditForm
-from gym.models import Trainer
+from gym.models import Trainer,MembershipPackage,PCategory
+from django import template
 
+register = template.Library()
 # Create your views here.
+
+@register.filter
+def split_facilities(facilities):
+    return facilities.split(',')
 
 def custom_404_view(request, exception):
     return render(request, '404.html', status=404)
 
 def gym_web_index(request):
     trainers = Trainer.objects.all()
-    return render(request, 'web_index.html', {'trainers': trainers})
+    packages= MembershipPackage.objects.all()
+    category = PCategory.objects.all() 
+    return render(request, 'web_index.html', {'trainers': trainers, 'packages':packages, 'category':category})
 
 def gym_web_service(request):
         return render(request, 'web_services.html')

@@ -1,0 +1,39 @@
+
+{% load static %}
+{% include '_navbar.html' %}
+<!-- partial -->
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class='row'>
+            <!-- Add Category Form -->
+            <div class="col-md-6 col-xl-4 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <form method="post" action="" class="forms-sample" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="id_name">Name:</label>
+                                <input type="text" name="name" value="{{ pcategory.name }}" maxlength="50" required="" id="id_name" class="form-control" disabled>
+                            </div>
+                            <div class="form-group">
+                                <label for="id_contact">Contact:</label>
+                                <input type="text" name="contact" value="{{ pcategory.description }}" maxlength="12" required="" id="id_contact" class="form-control" disabled>
+                            </div>
+                            
+                          
+                        
+                            <a type="submit" href="{% url 'edit_pcategory' pcategory.id %}" class="btn btn-inverse-warning me-2">Edit Trainer</a>
+                            <a href="{% url 'add_pcategory' %}" class="btn btn-inverse-secondary me-2">Back</a>
+                            </div>
+
+
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+{% include '_footer.html' %}

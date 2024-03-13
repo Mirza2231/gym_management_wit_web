@@ -51,6 +51,20 @@ urlpatterns = [
     path('edit_trainer/<int:trainer_id>/',admin_view.edit_trainer, name='edit_trainer'),
     path('delete_trainer/<int:trainer_id>/delete/', admin_view.delete_trainer, name='delete_trainer'),
     path('view_trainer/<int:pk>/',admin_view.TrainerDetailView.as_view() , name='trainer_detail'),
+    path('add_pcategory/',admin_view.pcategory,name='add_pcategory'),
+    path('edit_pcategory/<int:pcategory_id>/',admin_view.edit_pcategory, name='edit_pcategory'),
+    path('delete_pcategory/<int:pcategory_id>/delete/', admin_view.delete_pcategory, name='delete_pcategory'),
+    path('view_pcategory/<int:pk>/',admin_view.PcategoryDetailView.as_view() , name='pcategory_detail'),
+    path('package/',admin_view.membership_package, name='add_package'),
+    path('edit_package/<int:package_id>/',admin_view.edit_package, name='edit_package'),
+    path('view_package/<int:pk>/',admin_view.PackageDetailView.as_view() , name='package_detail'),
+    path('delete_package/<int:package_id>/delete/', admin_view.delete_pcategory, name='delete_package'),
+    
+    
+    
+    
+    
+
     path('table/',admin_view.Table,name='table'),
     
     

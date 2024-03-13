@@ -102,4 +102,31 @@
 
 </body>
 
+<script>
+// Get all elements with the class "facilities-list"
+var facilitiesLists = document.querySelectorAll(".facilities-list");
+
+// Loop through each facilities list element
+facilitiesLists.forEach(function(facilitiesList) {
+    // Split the facilities string by comma and create an array
+    var facilitiesArray = facilitiesList.textContent.split(',');
+
+    // Clear the content of the facilities list element
+    facilitiesList.innerHTML = "";
+
+    // Iterate over the facilities array
+    facilitiesArray.forEach(function(facility) {
+        // Create a new paragraph element for each facility
+        var facilityElement = document.createElement("p");
+        
+        // Set the text content of the paragraph to the facility
+        facilityElement.textContent = facility.trim(); // Trim any leading/trailing spaces
+        
+        // Append the paragraph element to the facilities list
+        facilitiesList.appendChild(facilityElement);
+    });
+});
+
+</script>
+
 </html>
