@@ -3562,6 +3562,30 @@ body>div.swal2-container.swal2-center.swal2-backdrop-show>div>div.swal2-actions>
 	margin-bottom: 20px;
 }
 
+#package{
+	font-size: 13px;
+	color: #d5d4d4;
+	width: 100%;
+	height: 46px;
+	border: 1px solid #575656;
+	padding-left: 45px;
+	padding-right: 5px;
+	background: transparent;
+	margin-bottom: 20px;
+}
+
+#package>option {
+	font-size: 13px;
+	color: #d5d4d4;
+	width: 100%;
+	height: 40px;
+	border: 1px solid #575656;
+	padding-left: 45px;
+	padding-right: 5px;
+	background: #272727;
+	margin-bottom: 20px;
+}
+
 .user {
 	position: relative;
 }
@@ -3664,4 +3688,11 @@ body > section.pricing-section.spad > div > div.row.justify-content-center > div
 	-webkit-transition: all 0.3s;
 	-o-transition: all 0.3s;
 	transition: all 0.3s;
+	margin-right: 26px;
+}
+
+/* body > section.services-section.spad > div > div > div:nth-child(1) > div > a:nth-child(5) */
+
+.history-text:hover a:nth-child(5) {
+	color: #f30000;
 }

@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import *
 from .forms import ContactForm
 from django.contrib import messages
@@ -174,3 +174,23 @@ def user_bookings(request):
     if request.user.is_authenticated:
         user_bookings = Booking.objects.filter(user=request.user)
         return render(request, 'booking_history.html', {'user_bookings': user_bookings})
+    
+def delete_booking(request, booking_id):
+    booking = Booking.objects.get(id=booking_id)
+    booking.delete()
+    sweetify.success(request,'Delete Sucessfull', timer=5000, timerProgressBar='true', persistent="Close")
+    return redirect('booking_detail')
+
+def edit_booking(request, booking_id):
+    booking = get_object_or_404(Booking, pk=booking_id)
+    packages = MembershipPackage.objects.all()
+    shifts = Shifts.objects.all()
+    if request.method == 'POST':
+        form = BookingForm(request.POST, instance=booking)
+        if form.is_valid():
+            form.save()
+            sweetify.success(request,'Edit Sucessfull', timer=5000, timerProgressBar='true', persistent="Close")
+            return redirect('booking_detail')  # Redirect to the booking detail page
+    else:
+        form = BookingForm(instance=booking)
+    return render(request, 'edit_booking.html', {'form': form,'packages':packages,'shifts':shifts})

@@ -77,3 +77,14 @@ class BookingForm(forms.ModelForm):
     class Meta:
         model = Booking
         fields = ['status', 'shift']  # Include shift field
+        
+from django import forms
+from .models import Booking
+
+class BookingForm(forms.ModelForm):
+    class Meta:
+        model = Booking
+        fields = ['shift', 'status','package']  # Add fields that you want to edit
+
+
+

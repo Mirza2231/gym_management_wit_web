@@ -1,0 +1,61 @@
+{% load static %}
+{% include '_navbar.html' %}
+<!-- partial -->
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class='row'>
+
+            <!-- Display Categories -->
+            <div class="col-md-4 col-xl-6 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body" style="
+                  overflow: auto;
+                  overflow-x: hidden;
+              ">
+                        <div class="d-flex flex-row justify-content-between">
+                            <h4 class="card-title">Booking</h4>
+                        </div>
+                        {% for booking in all_bookings %}
+
+                        <div class="preview-list">
+                            <div class="preview-item border-bottom">
+                                <div class="preview-thumbnail">
+
+                                    <img src="../..{{ MEDIA_URL }}{{ booking.user.userprofile.profile_pic.url }}" alt="user-image"
+                                        class="rounded-circle" />
+
+                                </div>
+                                <div class="preview-item-content d-flex flex-grow">
+                                    <div class="flex-grow">
+                                        <div class="d-flex d-md-block d-xl-flex justify-content-between">
+                                            <h6 class="preview-subject text-capitalize">{{ booking.package.package_name }}</h6>
+                                            <h6 class="preview-subject text-capitalize">{{ booking.status }}</h6>
+
+                                        </div>
+                                        <p class="text-muted">{{ booking.package.price }}</p>
+                                        <p class="text-muted">{{ booking.shift.shift }}</p>
+
+                                    </div>
+                                </div>
+                                <div class="d-flex d-md-block d-xl-flex justify-content-between" style="
+                                      width: 176px;
+                                      align-items: center;
+                                      justify-content: center !important;
+                                  ">
+                                <a href="{% url 'edit_booking_status' booking.id %}" class="btn btn-inverse-warning btn-sm">Edit</a>
+
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+
+          
+        </div>
+    </div>
+</div>
+</div>
+{% include '_footer.html' %}

@@ -38,6 +38,8 @@ urlpatterns = [
     path('profile/', web_view.profile_edit, name='proedit'),
     path('booking/<int:package_id>', web_view.book_time, name='book'),
     path('booking_detail/', web_view.user_bookings, name='booking_detail'),
+    path('delete_booking/<int:booking_id>/delete/', web_view.delete_booking, name='delete_booking'),
+    path('edit_booking/<int:booking_id>/',web_view.edit_booking, name='edit_booking'),
     
     
 
@@ -52,7 +54,7 @@ urlpatterns = [
     path('admin_login/',admin_view.Login, name='adminlogin'),
     path('admin_logout/',admin_view.adminLogout, name='adminlogout'),
     
-    path('admin_home/',admin_view.Home, name='home'),
+    path('admin_home/',admin_view.Home, name='admin_home'),
     path('add_trainer/',admin_view.ad_tariner,name='add_trainer'),
     path('edit_trainer/<int:trainer_id>/',admin_view.edit_trainer, name='edit_trainer'),
     path('delete_trainer/<int:trainer_id>/delete/', admin_view.delete_trainer, name='delete_trainer'),
@@ -66,6 +68,10 @@ urlpatterns = [
     path('view_package/<int:pk>/',admin_view.PackageDetailView.as_view() , name='package_detail'),
     path('delete_package/<int:package_id>/delete/', admin_view.delete_package, name='delete_package'),
     path('add_shift/', admin_view.add_shift, name='add_shift'),
+    path('admin_booking/', admin_view.all_bookings, name='admin_booking'),
+    path('edit_booking_status/<int:booking_id>/',admin_view.edit_booking_status , name='edit_booking_status'),
+    
+    
     
     
     

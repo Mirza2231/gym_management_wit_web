@@ -7,7 +7,7 @@
 <section class="services-section spad">
     <div class="container">
 
-        <div class="row" style="justify-content: space-between;">
+        <div class="row" style="justify-content: space-between; gap: 38px;">
             {% for booking in user_bookings %}
             <div class="col-lg-5 order-lg-2 col-md-6 p-0" style="padding: 0;">
                 <div class="history-text">
@@ -18,7 +18,8 @@
                     </div>
                     <p class="text-capitalize"><span style="color: #fff; letter-spacing: 1px;">facilities:</span> {{ booking.package.facilities }}</p>
                     <p class="text-capitalize"><span style="color: #fff; letter-spacing: 1px;">Shift:</span> {{ booking.shift }}</p>
-                    <a href="#" >Edit</a>
+                    <a href="{% url 'edit_booking' booking.id %}" >Edit</a>
+                    <a href="{% url 'delete_booking' booking.id %}" onclick="return confirm('Are you sure you want to delete this?');">Delete</a>
                 </div>
             </div>
         {% endfor %}

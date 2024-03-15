@@ -1,5 +1,6 @@
 from django import forms
 from .models import *
+from gym_web.models import *
 
 class AddTrainerForm(forms.ModelForm):
     class Meta:
@@ -48,3 +49,7 @@ class ShiftForm(forms.ModelForm):
         model = Shifts
         fields = ['shift'] 
         
+class BookingStatusForm(forms.ModelForm):
+    class Meta:
+        model = Booking
+        fields = ['status']

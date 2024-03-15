@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Booking Status</title>
+</head>
+<body>
+    <h1>Edit Booking Status</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save Changes</button>
+    </form>
+</body>
+</html>
+
+{% load static %}
+{% include '_navbar.html' %}
+<!-- partial -->
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class='row'>
+            <!-- Add Category Form -->
+            <div class="col-md-6 col-xl-4 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Add Packages</h4>
+                        <form method="post" action="" class="forms-sample" enctype="multipart/form-data">
+                            {% csrf_token %}
+
+                            <div class="form-group">
+                                <label for="status">Status</label>
+                                <select name="status" id="status" class="form-control">
+                                    <option value="Pending" {% if current_status == 'Pending' %} selected {% endif %}>Pending</option>
+                                    <option value="Confirmed" {% if current_status == 'Confirmed' %} selected {% endif %}>Confirmed</option>
+                                    <option value="Cancelled" {% if current_status == 'Cancelled' %} selected {% endif %}>Cancelled</option>
+                                </select><br>
+
+                            </div> 
+
+
+                            <button type="submit" class="btn btn-inverse-primary me-2">Edit Status</button>
+                            <a href="{% url 'admin_booking' %}" class="btn btn-inverse-secondary me-2">Back</a>
+
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+</div>
+{% include '_footer.html' %}

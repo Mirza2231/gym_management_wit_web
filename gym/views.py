@@ -3,22 +3,63 @@ from django.http import HttpResponseRedirect
 
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, logout, login
+from django.contrib.auth.decorators import login_required
 from .models import *
+from gym_web.models import *
 from .forms import *
 import sweetify
 from django.views.generic import DetailView
 
 # Create your views here.
-
-
-def Home(request):
-   return render(request, 'admin_index.html')
  
 def About(request):
     return render(request, 'about.html')
 
 # My Work Start
 
+def all_bookings(request):
+    # Query all bookings
+    all_bookings = Booking.objects.all()
+
+    context = {
+        'all_bookings': all_bookings,
+    }
+    return render(request, 'admin_booking.html', context)
+
+def edit_booking_status(request, booking_id):
+    booking = get_object_or_404(Booking, id=booking_id)
+    current_status = booking.status  # Get the current status of the booking
+
+    if request.method == 'POST':
+        new_status = request.POST.get('status')
+        booking.status = new_status
+        booking.save()
+        return redirect('admin_booking')
+
+    return render(request, 'edit_booking_status.html', {'booking': booking, 'current_status': current_status})
+
+def Home(request):
+    users = User.objects.filter(is_staff=False)  # Query data from Model1
+    trainers = Trainer.objects.all()  # Query data from Model1
+    pcategorys = PCategory.objects.all()  # Query data from Model2
+    packges = MembershipPackage.objects.all()  # Query data from Model3
+    shifts = Shifts.objects.all()  # Query data from Model3
+    
+    # Add more queries for other models as needed
+
+    context = {
+        'trainers': trainers,
+        'pcategorys': pcategorys,
+        'packges': packges,
+        'shifts': shifts,
+        'users': users,
+        
+        
+        # Add more data as needed
+    }
+    return render(request, 'admin_index.html', context)
+
+@login_required(login_url='/admin_login/')
 def ad_tariner(request):
     trainers = Trainer.objects.all()
     if request.method == 'POST':
@@ -33,11 +74,13 @@ def ad_tariner(request):
         trainer_form = AddTrainerForm()
     return render(request, 'admin_trainers.html', {'trainer_form': trainer_form, 'trainers': trainers})
 
+@login_required(login_url='/admin_login/')
 def delete_trainer(request, trainer_id):
     trainer = Trainer.objects.get(id=trainer_id)
     trainer.delete()
     return redirect('add_trainer')
 
+@login_required(login_url='/admin_login/')
 def edit_trainer(request, trainer_id):
     trainer = get_object_or_404(Trainer, id=trainer_id)
     if request.method == 'POST':
@@ -57,7 +100,8 @@ class TrainerDetailView(DetailView):
     model = Trainer
     template_name = 'trainer_detail.html'  # The template to render
     context_object_name = 'trainer'
-
+    
+@login_required(login_url='/admin_login/')
 def pcategory(request):
     pcategorys = PCategory.objects.all()
     if request.method == 'POST':
@@ -72,6 +116,7 @@ def pcategory(request):
         pcategory_form = PcategoryForm()
     return render(request, 'admin_pcategory.html', {'pcategory_form': pcategory_form, 'pcategorys': pcategorys})
 
+@login_required(login_url='/admin_login/')
 def edit_pcategory(request, pcategory_id):
     pcategory = get_object_or_404(PCategory, id=pcategory_id)
     if request.method == 'POST':
@@ -87,7 +132,7 @@ def edit_pcategory(request, pcategory_id):
         etpc_form = PcategoryEditForm(instance=pcategory)
     return render(request, 'edit_pcategory.html', {'etpc_form': etpc_form})
 
-
+@login_required(login_url='/admin_login/')
 def delete_pcategory(request, pcategory_id):
     pcategory = PCategory.objects.get(id=pcategory_id)
     pcategory.delete()
@@ -98,6 +143,7 @@ class PcategoryDetailView(DetailView):
     template_name = 'pcategory_detail.html'  # The template to render
     context_object_name = 'pcategory'
     
+@login_required(login_url='/admin_login/')
 def membership_package(request):
     packages = MembershipPackage.objects.all() 
     categories = PCategory.objects.all()
@@ -113,6 +159,7 @@ def membership_package(request):
         form = MembershipPackageForm()
     return render(request, 'admin_package.html', {'form': form, 'packages': packages,'categories':categories})
 
+@login_required(login_url='/admin_login/')
 def edit_package(request, package_id):
     package = get_object_or_404(MembershipPackage, id=package_id)
     s_category = PCategory.objects.all() 
@@ -140,12 +187,13 @@ class PackageDetailView(DetailView):
         context['category'] = category  # Add the category object to the context
         return context
     
+@login_required(login_url='/admin_login/')
 def delete_package(request, package_id):
     package = MembershipPackage.objects.get(id=package_id)
     package.delete()
     return redirect('add_package')
 
-
+@login_required(login_url='/admin_login/')
 def add_shift(request):
     shifts = Shifts.objects.all()
     if request.method == 'POST':
@@ -179,6 +227,7 @@ def Login(request):
     d = {'error': error}
     return render(request, 'adminlogin.html', d)
 
+@login_required(login_url='/admin_login/')
 def adminLogout(request):
     if not request.user.is_staff:
         return redirect('adminlogin')
