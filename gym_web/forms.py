@@ -3,9 +3,10 @@ from django import forms
 from .models import Contact
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .models import UserProfile
+from .models import UserProfile, Booking
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.forms import PasswordChangeForm
+from gym.models import *
 
 
 
@@ -69,3 +70,10 @@ class ProfileEditForm(forms.ModelForm):
             user.save()
             user_profile.save()
         return user_profile
+
+class BookingForm(forms.ModelForm):
+    shift = forms.ModelChoiceField(queryset=Shifts.objects.all(), empty_label=None)  # Add shift field
+
+    class Meta:
+        model = Booking
+        fields = ['status', 'shift']  # Include shift field

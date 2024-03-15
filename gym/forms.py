@@ -42,3 +42,9 @@ class PackageEditForm(forms.ModelForm):
         # Split input by commas and strip whitespace from each facility
         facilities = ','.join(facilities.split())
         return facilities  # Join back into a comma-separated string
+    
+class ShiftForm(forms.ModelForm):
+    class Meta:
+        model = Shifts
+        fields = ['shift'] 
+        

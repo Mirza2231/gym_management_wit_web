@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from gym.models import *
 
 # Create your models here.
 
@@ -24,3 +25,18 @@ class UserProfile(models.Model):
 
     def __str__(self):
         return self.user
+    
+class Booking(models.Model):
+    STATUS_CHOICES = [
+        ('Pending', 'Pending'),
+        ('Confirmed', 'Confirmed'),
+        ('Cancelled', 'Cancelled'),
+    ]
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    package = models.ForeignKey(MembershipPackage, on_delete=models.CASCADE)
+    shift = models.ForeignKey(Shifts, on_delete=models.CASCADE)
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='Pending')  # Add status field
+
+    def __str__(self):
+        return f'Booking for {self.user.username} at {self.time}'

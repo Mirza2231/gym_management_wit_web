@@ -55,6 +55,11 @@
                         href="{% url 'gym_web_service' %}">Services</a></li>
                 <li class="{% if request.path == '/team/' %}active{% endif %}"><a href="{% url 'gym_web_team' %}">Our
                         Team</a></li>
+                {% if request.user.is_authenticated %}
+                <!-- <p>{{ request.user.username }}</p> -->
+                <li class="{% if request.path == '/register/' %}active{% endif %}"><a
+                        href="{% url 'web_logout' %}">Booking History</a></li>
+                {% endif %}
                 <!-- <li><a href="#">Pages</a>
                     <ul class="dropdown">
                         <li><a href="./about-us.html">About us</a></li>
@@ -114,6 +119,7 @@
                                     href="{% url 'gym_web_service' %}">Services</a></li>
                             <li class="{% if request.path == '/team/' %}active{% endif %}"><a
                                     href="{% url 'gym_web_team' %}">Our Team</a></li>
+
                             <!-- <li><a href="./team.html">Our Team</a></li> -->
                             <!-- <li><a href="#">Pages</a>
                                 <ul class="dropdown">
@@ -128,7 +134,11 @@
                             </li> -->
                             <li class="{% if request.path == '/contact/' %}active{% endif %}"><a
                                     href="{% url 'gym_web_contact' %}">Contact</a></li>
-
+                                    {% if request.user.is_authenticated %}
+                                    <!-- <p>{{ request.user.username }}</p> -->
+                                    <li class="{% if request.path == '/booking_detail/' %}active{% endif %}"><a
+                                        href="{% url 'booking_detail' %}">Booking History</a></li>
+                                    {% endif %}
 
                         </ul>
                     </nav>

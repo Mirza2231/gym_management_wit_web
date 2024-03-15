@@ -100,17 +100,18 @@ class PcategoryDetailView(DetailView):
     
 def membership_package(request):
     packages = MembershipPackage.objects.all() 
+    categories = PCategory.objects.all()
     if request.method == 'POST':
         form = MembershipPackageForm(request.POST)
         if form.is_valid():
             form.save()
             sweetify.success(request, 'Your Submission Has Done Sucessfully', timer=5000, timerProgressBar='true', persistent="Close")
-            return redirect('admin_package.html')
+            return redirect('add_package')
         else:
             sweetify.error(request, 'Something Wrong Try Again Later', timer=5000, timerProgressBar='true', persistent="Close")
     else:
         form = MembershipPackageForm()
-    return render(request, 'admin_package.html', {'form': form, 'packages': packages})
+    return render(request, 'admin_package.html', {'form': form, 'packages': packages,'categories':categories})
 
 def edit_package(request, package_id):
     package = get_object_or_404(MembershipPackage, id=package_id)
@@ -139,16 +140,25 @@ class PackageDetailView(DetailView):
         context['category'] = category  # Add the category object to the context
         return context
     
-def delete_pcategory(request, package_id):
+def delete_package(request, package_id):
     package = MembershipPackage.objects.get(id=package_id)
     package.delete()
     return redirect('add_package')
 
-# My Work End
 
-def Table(request):
-    return render(request, 'basic-table.html')
+def add_shift(request):
+    shifts = Shifts.objects.all()
+    if request.method == 'POST':
+        shift_form = ShiftForm(request.POST)
+        if shift_form.is_valid():
+            shift_form.save()
+            sweetify.success(request, 'Your Submission Has Done Sucessfully', timer=5000, timerProgressBar='true', persistent="Close")
+        else:
+            sweetify.error(request, 'Something Wrong Try Again Later', timer=5000, timerProgressBar='true', persistent="Close")
 
+    else:
+        shift_form = ShiftForm()
+    return render(request, 'add_shift.html', {'shift_form': shift_form, 'shifts':shifts})
 
 def Login(request):
     error = ""
@@ -160,20 +170,31 @@ def Login(request):
         try:
             if user.is_staff:
                 login(request, user)
+                return redirect('add_package') 
                 error = "no"
             else:
                 error = "yes"
         except:
             error = "yes"
     d = {'error': error}
-    return render(request, 'login.html', d)
+    return render(request, 'adminlogin.html', d)
 
-
-def Logout(request):
+def adminLogout(request):
     if not request.user.is_staff:
-        return redirect('admin_login')
+        return redirect('adminlogin')
     logout(request)
-    return redirect('admin_login')
+    return redirect('adminlogin')
+
+# My Work End
+
+def Table(request):
+    return render(request, 'basic-table.html')
+
+
+
+
+
+
 
 
 def Add_Enquiry(request):

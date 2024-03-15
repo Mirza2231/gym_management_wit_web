@@ -201,7 +201,7 @@
                         <li class="facilities-list text-capitalize">{{package.facilities}}</li>
 
                     </ul>
-                    <a href="#" class="primary-btn pricing-btn">Enroll now</a>
+                    <a href="{% url 'book' package.id  %}" class="primary-btn pricing-btn">Enroll now</a>
                     <a href="#" class="thumb-icon"><i class="fa fa-picture-o"></i></a>
                 </div>
             </div>
@@ -262,7 +262,7 @@
                 <div class="col-lg-4" style="width: 100% !important;">
                     <div class="ts-item set-bg" data-setbg="../..{{ MEDIA_URL }}{{ trainer.profile_pic.url }}">
                         <div class="ts_text text-capitalize">
-                            <h4>{{ trainer.name }}</h4>
+                            <h4 class="text-capitalize">{{ trainer.name }}</h4>
                             <span>Gym Trainer</span>
                         </div>
                     </div>

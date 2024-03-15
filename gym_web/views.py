@@ -12,16 +12,11 @@ from django.contrib.auth import update_session_auth_hash
 from django.shortcuts import render, redirect
 from .forms import CustomPasswordChangeForm
 from django.contrib.auth.decorators import login_required
-from .forms import ProfileEditForm
-from gym.models import Trainer,MembershipPackage,PCategory
+from .forms import ProfileEditForm, BookingForm
+from gym.models import *
 from django import template
 
-register = template.Library()
-# Create your views here.
 
-@register.filter
-def split_facilities(facilities):
-    return facilities.split(',')
 
 def custom_404_view(request, exception):
     return render(request, '404.html', status=404)
@@ -33,7 +28,10 @@ def gym_web_index(request):
     return render(request, 'web_index.html', {'trainers': trainers, 'packages':packages, 'category':category})
 
 def gym_web_service(request):
-        return render(request, 'web_services.html')
+    trainers = Trainer.objects.all()
+    packages= MembershipPackage.objects.all()
+    category = PCategory.objects.all() 
+    return render(request, 'web_services.html', {'trainers': trainers, 'packages':packages, 'category':category})
              
 def gym_web_contact(request):
     if request.method == 'POST':
@@ -52,7 +50,8 @@ def gym_web_contact(request):
     return render(request, 'web_contact.html', {'form': form})
 
 def gym_web_about(request):
-    return render(request, 'web_about-us.html')
+    trainers = Trainer.objects.all()
+    return render(request, 'web_about-us.html', {'trainers': trainers,})
 
 def gym_web_team(request):
     trainers = Trainer.objects.all()
@@ -91,7 +90,7 @@ def signup(request):
 
 
 
-@login_required
+@login_required(login_url='/login/')
 def profile_edit(request):
     if request.method == 'POST':
         pro_form = ProfileEditForm(request.POST, request.FILES, instance=request.user.userprofile)
@@ -108,6 +107,7 @@ def profile_edit(request):
     else:
         pro_form = ProfileEditForm(instance=request.user.userprofile)
     return render(request, 'web_proedit.html', {'pro_form': pro_form})
+
 
 def login_view(request):
     if request.method == 'POST':
@@ -133,11 +133,12 @@ def login_view(request):
         login_form = UserLoginForm()
     return render(request, 'web_login.html', {'login_form': login_form})
 
-
+@login_required(login_url='/login/')
 def logout_view(request):
     logout(request)
     return redirect('gym_web_login')
 
+@login_required(login_url='/login/')
 def password_change(request):
     if request.method == 'POST':
         cp_form = CustomPasswordChangeForm(user=request.user, data=request.POST)
@@ -151,6 +152,25 @@ def password_change(request):
         cp_form = CustomPasswordChangeForm(user=request.user)
     return render(request, 'web_changepass.html', {'cp_form': cp_form})
 
+@login_required(login_url='/login/')
+def book_time(request, package_id):
+    package = MembershipPackage.objects.get(id=package_id)
+    shifts = Shifts.objects.all()  # Fetch all shifts
+    if request.method == 'POST':
+        form = BookingForm(request.POST)
+        if form.is_valid():
+            booking = form.save(commit=False)
+            booking.user = request.user
+            booking.package = package
+            booking.save()
+            sweetify.success(request,'Booking Submit Sucessfully', timer=5000, timerProgressBar='true', persistent="Close")
+            return redirect('gym_web_index')
+    else:
+        form = BookingForm()
+    return render(request, 'web_booking.html', {'form': form, 'package': package, 'shifts': shifts})
 
-
-
+@login_required(login_url='/login/')
+def user_bookings(request):
+    if request.user.is_authenticated:
+        user_bookings = Booking.objects.filter(user=request.user)
+        return render(request, 'booking_history.html', {'user_bookings': user_bookings})

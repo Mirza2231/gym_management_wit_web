@@ -1,0 +1,43 @@
+{% load static %}
+<!-- <link rel="stylesheet" href="../static/css/web_login.css"> -->
+
+{% include 'web_header.html' %}
+{% include 'web_bread.html' %}
+
+
+<!-- Contact Section Begin -->
+<section class="contact-section spad">
+    <!-- <a href="../static/css/web_login.css"></a> -->
+    <div class="container">
+        <div class="row" style="display: flex;justify-content: center">
+            <div class="col-lg-8">
+                <div class="leave-comment">
+                    <form method="post" enctype="multipart/form-data" id="profile-edit-form">
+                        {% csrf_token %}
+                        <input type="hidden" name="status"  value="Pending">
+
+                          <p>
+                            <label for="id_shift">Shift:</label>
+                            <select name="shift" id="id_shift">
+                                {% for shift in shifts %}
+                                    <option value="{{ shift.id }}">{{ shift.shift }}</option>
+                                {% endfor %}
+                            </select>
+                            
+                          </p>
+                        <!-- <p>
+                            <label for="id_father_name">Father name:</label>
+                            <input type="text" name="father_name" value="kuchorbhi" maxlength="100" required="" id="id_father_name">
+                            <input type="text" name="father_name" placeholder="Father Name" required value="{{ user.userprofile.father_name }}" disabled>
+                            <button type="button" class="enable-field" data-field="father_name"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                        </p> -->
+                        <button type="submit">Book</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Contact Section End -->
+
+{% include 'web_footer.html' %}

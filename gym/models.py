@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -82,3 +83,11 @@ class MembershipPackage(models.Model):
 
     def __str__(self):
         return self.package_name
+    
+    
+class Shifts(models.Model):
+    shift = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.shift
+    

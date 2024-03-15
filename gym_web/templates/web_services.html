@@ -102,63 +102,25 @@
             </div>
         </div>
         <div class="row justify-content-center">
+            {% for package in packages %}
             <div class="col-lg-4 col-md-8">
                 <div class="ps-item">
-                    <h3>Class drop-in</h3>
+                    <h3 class="text-capitalize">{{package.package_name}}</h3>
                     <div class="pi-price">
-                        <h2>$ 39.0</h2>
-                        <span>SINGLE CLASS</span>
+                        <h2>Rs {{package.price}}</h2>
+                        <span>{{ package.category.name }}</span>
                     </div>
                     <ul>
-                        <li>Free riding</li>
-                        <li>Unlimited equipments</li>
-                        <li>Personal trainer</li>
-                        <li>Weight losing classes</li>
-                        <li>Month to mouth</li>
-                        <li>No time restriction</li>
+
+                        <li class="facilities-list text-capitalize">{{package.facilities}}</li>
+
                     </ul>
-                    <a href="#" class="primary-btn pricing-btn">Enroll now</a>
+                    <a href="{% url 'book' package.id  %}" class="primary-btn pricing-btn">Enroll now</a>
                     <a href="#" class="thumb-icon"><i class="fa fa-picture-o"></i></a>
                 </div>
             </div>
-            <div class="col-lg-4 col-md-8">
-                <div class="ps-item">
-                    <h3>12 Month unlimited</h3>
-                    <div class="pi-price">
-                        <h2>$ 99.0</h2>
-                        <span>SINGLE CLASS</span>
-                    </div>
-                    <ul>
-                        <li>Free riding</li>
-                        <li>Unlimited equipments</li>
-                        <li>Personal trainer</li>
-                        <li>Weight losing classes</li>
-                        <li>Month to mouth</li>
-                        <li>No time restriction</li>
-                    </ul>
-                    <a href="#" class="primary-btn pricing-btn">Enroll now</a>
-                    <a href="#" class="thumb-icon"><i class="fa fa-picture-o"></i></a>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-8">
-                <div class="ps-item">
-                    <h3>6 Month unlimited</h3>
-                    <div class="pi-price">
-                        <h2>$ 59.0</h2>
-                        <span>SINGLE CLASS</span>
-                    </div>
-                    <ul>
-                        <li>Free riding</li>
-                        <li>Unlimited equipments</li>
-                        <li>Personal trainer</li>
-                        <li>Weight losing classes</li>
-                        <li>Month to mouth</li>
-                        <li>No time restriction</li>
-                    </ul>
-                    <a href="#" class="primary-btn pricing-btn">Enroll now</a>
-                    <a href="#" class="thumb-icon"><i class="fa fa-picture-o"></i></a>
-                </div>
-            </div>
+            {% endfor %}
+
         </div>
     </div>
 </section>

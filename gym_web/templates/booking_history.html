@@ -1,0 +1,35 @@
+{% load static %}
+{% include 'web_header.html' %}
+{% include 'web_bread.html' %}
+
+
+<!-- Services Section Begin -->
+<section class="services-section spad">
+    <div class="container">
+
+        <div class="row" style="justify-content: space-between;">
+            {% for booking in user_bookings %}
+            <div class="col-lg-5 order-lg-2 col-md-6 p-0" style="padding: 0;">
+                <div class="history-text">
+                    <div class="d-flex" style="justify-content: space-between;">
+                        <h4 class="text-capitalize">{{ booking.package }}</h4>
+
+                        <p class="text-capitalize">{{ booking.status }}</p>
+                    </div>
+                    <p class="text-capitalize"><span style="color: #fff; letter-spacing: 1px;">facilities:</span> {{ booking.package.facilities }}</p>
+                    <p class="text-capitalize"><span style="color: #fff; letter-spacing: 1px;">Shift:</span> {{ booking.shift }}</p>
+                    <a href="#" >Edit</a>
+                </div>
+            </div>
+        {% endfor %}
+            
+            <!-- <li>{{ booking.package }} - {{ booking.shift }}</li> -->
+            <!-- Add more details as needed -->
+
+
+        </div>
+    </div>
+</section>
+<!-- Services Section End -->
+
+{% include 'web_footer.html' %}
