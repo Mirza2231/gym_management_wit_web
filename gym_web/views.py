@@ -12,7 +12,7 @@ from django.contrib.auth import update_session_auth_hash
 from django.shortcuts import render, redirect
 from .forms import CustomPasswordChangeForm
 from django.contrib.auth.decorators import login_required
-from .forms import ProfileEditForm, BookingForm
+from .forms import ProfileEditForm, BookingForm,BookingEditForm
 from gym.models import *
 from django import template
 
@@ -186,11 +186,11 @@ def edit_booking(request, booking_id):
     packages = MembershipPackage.objects.all()
     shifts = Shifts.objects.all()
     if request.method == 'POST':
-        form = BookingForm(request.POST, instance=booking)
+        form = BookingEditForm(request.POST, instance=booking)
         if form.is_valid():
             form.save()
             sweetify.success(request,'Edit Sucessfull', timer=5000, timerProgressBar='true', persistent="Close")
             return redirect('booking_detail')  # Redirect to the booking detail page
     else:
-        form = BookingForm(instance=booking)
+        form = BookingEditForm(instance=booking)
     return render(request, 'edit_booking.html', {'form': form,'packages':packages,'shifts':shifts})
