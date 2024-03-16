@@ -125,7 +125,6 @@ def login_view(request):
             errors = []
             for field_errors in login_form.errors.values():
                 errors.extend(field_errors)
-
             error_messages = "\n".join(errors)
             sweetify.error(request, f'{error_messages}', timer=5000, timerProgressBar='true', persistent="Close")
             # sweetify.error(request, f'{login_form.errors}', timer=5000, timerProgressBar='true', persistent="Close")

@@ -17,6 +17,12 @@ def About(request):
 
 # My Work Start
 
+class BookingDetailView(DetailView):
+    model = Booking
+    template_name = 'booking_detail.html'
+    context_object_name = 'booking'
+
+@login_required(login_url='/admin_login/')
 def all_bookings(request):
     # Query all bookings
     all_bookings = Booking.objects.all()
@@ -26,6 +32,7 @@ def all_bookings(request):
     }
     return render(request, 'admin_booking.html', context)
 
+@login_required(login_url='/admin_login/')
 def edit_booking_status(request, booking_id):
     booking = get_object_or_404(Booking, id=booking_id)
     current_status = booking.status  # Get the current status of the booking
@@ -38,6 +45,7 @@ def edit_booking_status(request, booking_id):
 
     return render(request, 'edit_booking_status.html', {'booking': booking, 'current_status': current_status})
 
+@login_required(login_url='/admin_login/')
 def Home(request):
     users = User.objects.filter(is_staff=False)  # Query data from Model1
     trainers = Trainer.objects.all()  # Query data from Model1
@@ -140,7 +148,7 @@ def delete_pcategory(request, pcategory_id):
 
 class PcategoryDetailView(DetailView):
     model = PCategory
-    template_name = 'pcategory_detail.html'  # The template to render
+    template_name = 'pcategory_detail.html'
     context_object_name = 'pcategory'
     
 @login_required(login_url='/admin_login/')
@@ -235,134 +243,3 @@ def adminLogout(request):
     return redirect('adminlogin')
 
 # My Work End
-
-def Table(request):
-    return render(request, 'basic-table.html')
-
-
-
-
-
-
-
-
-def Add_Enquiry(request):
-    error = ""
-    if not request.user.is_staff:
-        return redirect('login')
-    if request.method == 'POST':
-        n = request.POST['name']
-        c = request.POST['contact']
-        e = request.POST['emailid']
-        a = request.POST['age']
-        g = request.POST['gender']
-        try:
-            Enquiry.objects.create(
-                name=n, contact=c, emailid=e, age=a, gender=g)
-            error = "no"
-        except:
-            error = "yes"
-    d = {'error': error}
-    return render(request, 'add_enquiry.html', d)
-
-
-def View_Enquiry(request):
-    enq = Enquiry.objects.all()
-    d = {'enq': enq}
-    return render(request, 'view_enquiry.html', d)
-def Delete_Enquiry(request,pid):
-    enquiry = Enquiry.objects.get(id=pid)
-    enquiry.delete()
-    return redirect('view_enquiry')
-
-
-def Add_Equipment(request):
-    error = ""
-    if not request.user.is_staff:
-        return redirect('login')
-    if request.method == 'POST':
-        n = request.POST['name']
-        p = request.POST['price']
-        u = request.POST['unit']
-        d = request.POST['date']
-        desc = request.POST['desc']
-        try:
-            Equipment.objects.create( name=n, price=p, unit=u, date=d, description=desc)
-            error = "no"
-        except:
-            error = "yes"
-    d = {'error': error}
-    return render(request, 'add_equipment.html', d)
-
-
-def View_Equipment(request):
-    equ = Equipment.objects.all()
-    d = {'equ': equ}
-    return render(request, 'view_equipment.html', d)
-
-def Delete_Equipment(request,pid):
-    equipment = Equipment.objects.get(id=pid)
-    equipment.delete()
-    return redirect('view_equipment')
-
-def Add_Plan(request):
-    error = ""
-    if not request.user.is_staff:
-        return redirect('login')
-    if request.method == 'POST':
-        n = request.POST['name']
-        a = request.POST['amount']
-        d = request.POST['duration']
-        try:
-            Plan.objects.create( name=n, amount=a, duration=d)
-            error = "no"
-        except:
-            error = "yes"
-    d = {'error': error}
-    return render(request, 'add_plan.html', d)
-
-
-def View_Plan(request):
-    pln = Plan.objects.all()
-    d = {'pln': pln}
-    return render(request, 'view_plan.html', d)
-
-def Delete_Plan(request,pid):
-    plan = Plan.objects.get(id=pid)
-    plan.delete()
-    return redirect('view_plan')
-
-def Add_Member(request):
-    error = ""
-    plan1 = Plan.objects.all()
-    if not request.user.is_staff:
-        return redirect('login')
-    if request.method == 'POST':
-        n = request.POST['name']
-        c = request.POST['contact']
-        e = request.POST['emailid']
-        a = request.POST['age']
-        g = request.POST['gender']
-        p = request.POST['plan']
-        joindate = request.POST['joindate']
-        expiredate = request.POST['expdate']
-        initialamount = request.POST['initialamount']
-        plan = Plan.objects.filter(name=p).first()
-        try:
-            Member.objects.create( name=n, contact=c,emailid=e, age=a,gender=g,plan=plan, joindate=joindate, expiredate = expiredate, initialamount = initialamount)
-            error = "no"
-        except:
-            error = "yes"
-    d = {'error': error, 'plan':plan1}
-    return render(request, 'add_member.html', d)
-
-
-def View_Member(request):
-    member = Member.objects.all()
-    d = {'member': member}
-    return render(request, 'view_member.html', d)
-
-def Delete_Member(request,pid):
-    member = Member.objects.get(id=pid)
-    member.delete()
-    return redirect('view_member')

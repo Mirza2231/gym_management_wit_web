@@ -70,34 +70,13 @@ urlpatterns = [
     path('add_shift/', admin_view.add_shift, name='add_shift'),
     path('admin_booking/', admin_view.all_bookings, name='admin_booking'),
     path('edit_booking_status/<int:booking_id>/',admin_view.edit_booking_status , name='edit_booking_status'),
+    path('booking_detail/<int:pk>/',admin_view.BookingDetailView.as_view() , name='booking_detail'),
     
     
     
     
     
     
-    
-    
-
-    path('table/',admin_view.Table,name='table'),
-    
-    
-    path('add_enquiry/',admin_view.Add_Enquiry,name='add_enquiry'),
-    path('view_enquiry/',admin_view.View_Enquiry,name='view_enquiry'),
-    path('delete_enquiry(?p<int:pid>)', admin_view.Delete_Enquiry, name='delete_enquiry'),
-
-    path('add_equipment/',admin_view.Add_Equipment,name='add_equipment'),
-    path('view_equipment/',admin_view.View_Equipment,name='view_equipment'),
-    path('delete_equipment(?p<int:pid>)', admin_view.Delete_Equipment, name='delete_equipment'),
-
-    path('add_plan/',admin_view.Add_Plan,name='add_plan'),
-    
-    path('view_plan/',admin_view.View_Plan,name='view_plan'),
-    path('delete_plan(?p<int:pid>)', admin_view.Delete_Plan, name='delete_plan'),
-
-    path('add_member/',admin_view.Add_Member,name='add_member'),
-    path('view_member/',admin_view.View_Member,name='view_member'),
-    path('delete_member(?p<int:pid>)', admin_view.Delete_Member, name='delete_member'),
 ]
 
 

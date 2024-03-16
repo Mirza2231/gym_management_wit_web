@@ -29,9 +29,10 @@ class MembershipPackageForm(forms.ModelForm):
 
     def clean_facilities(self):
         facilities = self.cleaned_data['facilities']
-        # Split input by commas and strip whitespace from each facility
-        facilities = ','.join(facilities.split())
-        return facilities  # Join back into a comma-separated string
+        # Split input by commas, strip whitespace from each facility,
+        # and remove empty elements caused by consecutive commas
+        facilities = [facility.strip() for facility in facilities.split(',') if facility.strip()]
+        return ','.join(facilities)  # Join back into a comma-separated
     
 class PackageEditForm(forms.ModelForm):
     class Meta:
@@ -40,9 +41,10 @@ class PackageEditForm(forms.ModelForm):
 
     def clean_facilities(self):
         facilities = self.cleaned_data['facilities']
-        # Split input by commas and strip whitespace from each facility
-        facilities = ','.join(facilities.split())
-        return facilities  # Join back into a comma-separated string
+        # Split input by commas, strip whitespace from each facility,
+        # and remove empty elements caused by consecutive commas
+        facilities = [facility.strip() for facility in facilities.split(',') if facility.strip()]
+        return ','.join(facilities)  # Join back into a comma-separated
     
 class ShiftForm(forms.ModelForm):
     class Meta:

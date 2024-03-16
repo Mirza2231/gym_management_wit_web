@@ -41,8 +41,11 @@
                                       width: 176px;
                                       align-items: center;
                                       justify-content: center !important;
+                                      gap: 12px;
                                   ">
                                 <a href="{% url 'edit_booking_status' booking.id %}" class="btn btn-inverse-warning btn-sm">Edit</a>
+                                <a href="{% url 'booking_detail' booking.id %}" class="btn btn-inverse-info btn-sm">View</a>
+
 
                                 </div>
                             </div>
